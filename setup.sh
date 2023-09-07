@@ -13,7 +13,8 @@
 
 # https://git.techelevator.com/campuses/cbus/sep-2022/c-sharp/instructor-code
 
-upstream_repo="https://git.techelevator.com/campuses/cbus/sept-2023/c-sharp/instructor-code"
+upstream_repo="https://git.techelevator.com/campuses/cbus/sep-2023/c-sharp/instructor-code.git"
+               
 
 echo
 read -r -p "Enter your name (First Last): " name
