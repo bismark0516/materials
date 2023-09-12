@@ -12,72 +12,87 @@ namespace Lecture
 		    1. Create a variable to hold an int and call it numberOfExercises.
 			Then set it to 26.
 		    */
+            int numberOfExercises = 26;
 
-            //Console.WriteLine(numberOfExercises);
+            Console.WriteLine(numberOfExercises);
 
             /*
             2. Create a variable to hold a double and call it half.
                 Set it to 0.5.
             */
-
-            //Console.WriteLine(half);
+            double half = 0.5;
+            
+            Console.WriteLine(half);
 
             /*
             3. Create a variable to hold a string and call it name.
                 Set it to "TechElevator".
             */
+            string name = "TechElevator";
 
-            //Console.WriteLine(name);
+            Console.WriteLine(name);
 
             /*
             4. Create a variable called seasonsOfFirefly and set it to 1.
             */
-
-            //Console.WriteLine(seasonsOfFirefly);
+            int seasonsOfFirefly = 1;
+            Console.WriteLine(seasonsOfFirefly);
 
             /*
             5. Create a variable called myFavoriteLanguage and set it to "C#".
-            */
+            */ 
+            string myFavoriteLanguage = "C#";  
 
-            //Console.WriteLine(myFavoriteLanguage);
+            Console.WriteLine(myFavoriteLanguage);
 
             /*
             6. Create a variable called pi and set it to 3.1416.
             */
+            double pi = 3.1416;
 
-            //Console.WriteLine(pi);
+            Console.WriteLine(pi);
 
             /*
             7. Create and set a variable that holds your name.
             */
+            string myName = "Bismark Akomeah";
+            Console.WriteLine(myName);
 
             /*
             8. Create and set a variable that holds the number of buttons on your mouse.
             */
-
+            int numberOfButtons = 3;
+            Console.WriteLine(numberOfButtons);
             /*
             9. Create and set a variable that holds the percentage of battery left on
             your phone.
             */
-
+            double batteryPercentage = 92;
+            Console.WriteLine(batteryPercentage);
             /* EXPRESSIONS */
 
             /*
             10. Create an int variable that holds the difference between 121 and 27.
             */
-
+            int result = 121 - 27;
+            Console.WriteLine(result);
             /*
             11. Create a double that holds the addition of 12.3 and 32.1.
             */
+            double finalResult = 12.3 + 32.1;
 
             /*
             12. Create a string that holds your full name.
             */
+            string fullName =  "Bismark Akomeah";
+            Console.WriteLine(fullName);
 
             /*
             13. Create a string that holds the word "Hello, " concatenated onto your
             name from above.
             */
+            fullName = "Hello, " + fullName;
+            Console.WriteLine(fullName);
 
             /*
             14. Add a " Esquire" onto the end of your full name and save it back to
@@ -121,6 +136,7 @@ namespace Lecture
             /*
             23. If I divide 5 by 2, what's my remainder?
             */
+
 
             /*
             24. Create two variables: 3 and 1,000,000,000 and multiple them together.

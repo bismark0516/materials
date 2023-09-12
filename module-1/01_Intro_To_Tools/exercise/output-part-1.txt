@@ -15,7 +15,7 @@
 ✅ 12. /c/Users/Student/playground/usa/pennsylvania/allegheny exists
 ✅ 13. /c/Users/Student/playground/usa/michigan/wayne exists
 ✅ 14. /c/Users/Student/playground/usa/ohio/cuyahoga/cleveland.txt exists
-❗️ 15. /c/Users/Student/playground/usa/ohio/hamilton/cincinnati.txt does not exist
+✅ 15. /c/Users/Student/playground/usa/ohio/hamilton/cincinnati.txt exists
 ✅ 16. /c/Users/Student/playground/usa/ohio/franklin/columbus.txt exists
 ✅ 17. /c/Users/Student/playground/usa/pennsylvania/allegheny/pittsburgh.txt exists
 ✅ 18. /c/Users/Student/playground/usa/michigan/wayne/detroit.txt exists
@@ -25,13 +25,9 @@
 ✅ 22. /c/Users/Student/playground/canada/british-columbia/prince-george.txt exists
 
 Total tests: 22
-Tests passed: 21
-Errors: 1
+Tests passed: 22
+Errors: 0
 
- You still need to make a few more changes.
- If you are having difficulty troubleshooting, try the following:
- - Use 'pwd' to print out your current working directory.
- - Check for typos in the names of folders or file paths.
- - When changing directories, '..' means up one directory. '.' means the current directory.
- - Reference Finder (Mac) or Explorer (PC) to make sure everything is in the correct location.
+Congratulations! All tests in Part 1 are passing.
+Continue on to Part 2 in the README.
 
