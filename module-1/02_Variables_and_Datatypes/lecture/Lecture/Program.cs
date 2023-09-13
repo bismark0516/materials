@@ -67,8 +67,8 @@ namespace Lecture
             9. Create and set a variable that holds the percentage of battery left on
             your phone.
             */
-            double batteryPercentage = 92;
-            Console.WriteLine(batteryPercentage);
+            double myBatteryPercentage = .92;
+            Console.WriteLine(myBatteryPercentage);
             /* EXPRESSIONS */
 
             /*
