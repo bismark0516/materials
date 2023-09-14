@@ -7,9 +7,10 @@
             Change the code so it does that.
             TOPIC: Return Types
         */
-        public bool ReturnNameOfLanguage()
+        public string ReturnNameOfLanguage()
         {
-            return false;
+            
+            return "C#";
         }
     }
 }

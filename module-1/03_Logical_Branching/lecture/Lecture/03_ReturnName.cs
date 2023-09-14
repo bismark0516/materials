@@ -9,7 +9,8 @@
         */
         public string ReturnName()
         {
-            return null;
+            string name = "Bismark";
+            return name;
         }
     }
 }

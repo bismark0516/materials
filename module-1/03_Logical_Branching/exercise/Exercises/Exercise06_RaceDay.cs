@@ -29,7 +29,19 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public int DetermineRaceBlock(int age, bool isEarlyRegistration)
         {
-            return 0;
+            if (age >= 18 && isEarlyRegistration)
+            {
+            return 1;
+            }
+            else if (age >= 18)
+            {
+                return 2;
+            }
+            else
+            {
+            return 3;
+            }
+
         }
 
         /*
@@ -55,7 +67,17 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public int GetBibNumber(int age, int registrationNumber, bool isEarlyRegistration)
         {
-            return 0;
+            if (age >= 18 && isEarlyRegistration)
+                return registrationNumber + 1000;
+            else if (age >= 18)
+            {
+                return registrationNumber;
+            }
+            else
+            {
+                return registrationNumber;
+            }
+        
         }
 
         /*
@@ -79,7 +101,19 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public int GetConfirmedBibNumber(int age, int registrationNumber, bool isEarlyRegistration)
         {
-            return 0;
+            if (age >= 18 && isEarlyRegistration)
+                return registrationNumber + 1000;
+            
+            if (!isEarlyRegistration && registrationNumber > 1000)
+            {
+                return -1;
+            }
+
+            else
+            {
+            return registrationNumber;
+            }
+            
         }
     }
 }

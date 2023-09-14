@@ -31,7 +31,14 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public double CalculateStayTotal(int numberOfNights)
         {
-            return 0.0;
+            if (numberOfNights >= MinimumNightsForDiscountRate)
+            {
+                return DiscountRate * numberOfNights;
+            }
+            else
+            {
+                return DailyRate * numberOfNights;
+            }
         }
 
         /*
@@ -47,7 +54,22 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public double CalculateStayTotal(int numberOfNights, bool includesParking)
         {
-            return 0.0;
+            if (numberOfNights >= MinimumNightsForDiscountRate && includesParking)
+            {
+                return (DiscountRate * numberOfNights)+ (numberOfNights * ParkingRate);
+            }
+            else if (numberOfNights >= MinimumNightsForDiscountRate)
+            {
+                return (DiscountRate * numberOfNights);
+            }
+            else if (numberOfNights < MinimumNightsForDiscountRate && includesParking)
+            {
+                return (DailyRate * numberOfNights) + (numberOfNights * ParkingRate);
+            }
+            else
+            {
+                return DailyRate * numberOfNights;
+            }
         }
 
         /*
@@ -68,7 +90,35 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public double CalculateStayTotal(int numberOfNights, bool includesParking, bool includesLateCheckout)
         {
-            return 0.0;
+
+            if (numberOfNights < MinimumNightsForDiscountRate)
+            {
+                double totalCost = DailyRate * numberOfNights;
+                if (includesParking)
+                {
+                    totalCost += numberOfNights * ParkingRate;
+                }
+                if (includesLateCheckout)
+                {
+                    totalCost += LateCheckoutFee;
+                }
+                return totalCost;
+            }
+            else
+            {
+                double totalCost = DiscountRate * numberOfNights; 
+                if (includesParking)
+                {
+                    totalCost += numberOfNights * ParkingRate;
+                }
+                if (includesLateCheckout)
+                {
+                    totalCost += LateCheckoutFee;
+                }
+                return totalCost;
+            }
+
+            }
         }
     }
-}
+

@@ -11,13 +11,13 @@
         {
             if (number > 5)
             {
-
+                return true;
             }
             else
             {
+                return false;
 
             }
-            return false;
         }
     }
 }

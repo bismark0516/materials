@@ -34,7 +34,18 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool IsStoreOpen(int currentHour)
         {
-            return false;
+            if (currentHour >= 8 && currentHour < 17)
+            {
+                return true;
+            }
+            if (currentHour >= 17)
+            {
+                return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /*
@@ -56,7 +67,14 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool IsStoreOpen(int currentHour, char currentDay)
         {
-            return false;
+            if ((currentDay == 'M' || currentDay == 'W' || currentDay == 'F') && (currentHour >= 8 && currentHour < 17))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /*
@@ -75,7 +93,32 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool IsStoreOpen(int currentHour, char currentDay, bool isSummer)
         {
+            if (isSummer)
+            {
+                if ((currentDay == 'M' || currentDay == 'W' || currentDay == 'F') && currentHour >= 8 && currentHour < 17)
+                {
+                    return true;
+                }
+                if (currentDay == 'W' && currentHour < 20)
+                {
+                    return true;
+                }
+                if (currentDay == 'S' && currentHour >= 9 && currentHour < 15)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if ((currentDay == 'M' && currentHour >= 8 && currentHour < 17) ||
+                    (currentDay == 'W' && currentHour >= 8 && currentHour < 17) ||
+                    (currentDay == 'F' && currentHour >= 8 && currentHour < 17))
+                {
+                    return true;
+                }
+            }
             return false;
+
         }
     }
 }

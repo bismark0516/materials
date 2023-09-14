@@ -27,7 +27,14 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool AcceptPackage(int weightInPounds)
         {
-            return false;
+            if (weightInPounds <= MaxWeightPounds)
+            {
+            return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         /*
@@ -44,7 +51,16 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool AcceptPackage(int weightInPounds, int lengthInInches, int widthInInches, int heightInInches)
         {
-            return false;
+            int cubicInches = lengthInInches * widthInInches * heightInInches;
+
+            if (weightInPounds <= MaxWeightPounds && cubicInches <= MaxCubicInches)
+            {
+            return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /* 
@@ -67,7 +83,16 @@ namespace TechElevator.Exercises.LogicalBranching
          */
         public bool AcceptPackage(int weightInPounds, int lengthInInches, int widthInInches, int heightInInches, bool isSurchargePaid)
         {
-            return false;
+            int dimensionCal = lengthInInches * heightInInches * widthInInches;
+            
+            if (weightInPounds <= MaxWeightPounds && dimensionCal <= MaxCubicInches)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
