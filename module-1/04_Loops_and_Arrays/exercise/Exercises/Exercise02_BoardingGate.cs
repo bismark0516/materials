@@ -31,7 +31,12 @@ namespace Exercises
         */
         public bool[] GenerateSeatingChart(int numberOfSeats)
         {
-            return new bool[] { };
+            bool[] seatingChart = new bool[numberOfSeats];
+            for (int i = 0; i < numberOfSeats; i++)
+            {
+                seatingChart[i] = IsAvailable;
+            }
+            return seatingChart;
         }
 
         /*
@@ -51,25 +56,52 @@ namespace Exercises
         */
         public int GetAvailableSeatCount(bool[] seatingChart)
         {
-            return 0;
+            int availableSeats = 0;
+            for (int i = 0; i < seatingChart.Length; i++)
+            {
+                if (seatingChart[i] == IsAvailable)
+                {
+                    availableSeats++;
+                }
+
+            }
+            return availableSeats;
         }
 
-        /*
-        The crew determined that it would be nice to know how many rows on the plane are at full occupancy.
-        Each row has three seats and a row is at full occupancy if all three seats have someone sitting in them.
+            /*
+            The crew determined that it would be nice to know how many rows on the plane are at full occupancy.
+            Each row has three seats and a row is at full occupancy if all three seats have someone sitting in them.
 
-        Using the boolean array, implement the logic to count the number of full rows on the plane.
-        Note: A new row starts at every third element. For example, row one begins with index 0, row two begins with index 3, and so on.
+            Using the boolean array, implement the logic to count the number of full rows on the plane.
+            Note: A new row starts at every third element. For example, row one begins with index 0, row two begins with index 3, and so on.
 
-        Examples:
-        GetNumberOfFullRows([IsOccupied, IsOccupied, IsOccupied, IsOccupied, IsOccupied, IsOccupied]) → 2
-        GetNumberOfFullRows([IsOccupied, IsOccupied, IsOccupied, IsAvailable, IsAvailable, IsAvailable]) → 1
-        GetNumberOfFullRows([IsAvailable, IsAvailable, IsAvailable, IsAvailable, IsAvailable, IsAvailable]) → 0    
-        */
+            Examples:
+            GetNumberOfFullRows([IsOccupied, IsOccupied, IsOccupied, IsOccupied, IsOccupied, IsOccupied]) → 2
+            GetNumberOfFullRows([IsOccupied, IsOccupied, IsOccupied, IsAvailable, IsAvailable, IsAvailable]) → 1
+            GetNumberOfFullRows([IsAvailable, IsAvailable, IsAvailable, IsAvailable, IsAvailable, IsAvailable]) → 0    
+            */
 
-        public int GetNumberOfFullRows(bool[] seatingChart)
-        {
-            return 0;
+            public int GetNumberOfFullRows(bool[] seatingChart)
+            {
+            int fullRow = 0;
+            int occupiedSeatInCurrentRow = 0;
+            for (int i = 0; i < seatingChart.Length; i++)
+            {
+                if (seatingChart[i] == IsOccupied)
+                {
+                    occupiedSeatInCurrentRow++;
+                    if (occupiedSeatInCurrentRow >= 3)
+                    {
+                        fullRow++;
+                        occupiedSeatInCurrentRow = 0;
+                    }
+                }
+                else
+                    occupiedSeatInCurrentRow = 0;
+
+            }
+              
+                return fullRow;
+            }
         }
     }
-}

@@ -8,7 +8,8 @@
         */
         public int ReturnFirstElementOfParam(int[] passedInArray)
         {
-            return 1;
+            int result = passedInArray[0];
+            return result;
         }
 
         /*
@@ -17,6 +18,7 @@
         */
         public void SetFirstElement(int[] passedInArray)
         {
+            passedInArray[0] = 100;
             return;
         }
     }

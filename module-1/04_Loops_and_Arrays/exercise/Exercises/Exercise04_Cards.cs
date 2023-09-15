@@ -30,7 +30,14 @@ namespace Exercises
         */
         public string GetFirstCard(string[] hand)
         {
-            return "";
+            if (hand.Length > 0)
+            {
+                return hand[0];
+            }
+            else
+            {
+                return "No cards in the hand";
+            }
         }
 
         /*
@@ -48,7 +55,21 @@ namespace Exercises
         */
         public string[] DiscardFirstCard(string[] hand)
         {
-            return new string[] { };
+            if (hand.Length >= 5)
+            {
+                string[] newHand = new string[4];
+                for (int i = 1; i < 5; i++)
+                {
+                    newHand[i - 1] = hand[i];
+                }
+                return newHand;
+
+            }
+            else
+            {
+                return new string[0];
+
+            }
         }
 
         /*
@@ -68,7 +89,22 @@ namespace Exercises
         */
         public string[] DiscardTopCard(string[] remainingDeck)
         {
-            return new string[] { };
+            if (remainingDeck.Length > 1)
+            {
+            string[] newDeck = new string[remainingDeck.Length - 1];
+            for (int i = 1; i < remainingDeck.Length; i++)
+                {
+                newDeck[i - 1] = remainingDeck[i];
+                }
+            return newDeck;
+            }
+            else
+            {
+                return new string[0];
+            }
+
         }
+       
+            
     }
 }

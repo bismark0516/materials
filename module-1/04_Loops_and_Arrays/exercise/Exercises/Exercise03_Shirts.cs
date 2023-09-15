@@ -22,8 +22,20 @@ namespace Exercises
         */
         public char[] BuildOrder()
         {
-            return new char[] { };
+            char[] shirtOrder = new char[6];
+            for ( int i = 0; i < 3; i++)
+            {
+                shirtOrder[i] = 'S';
+            }
+            for (int i = 3; i < 5; i++)
+            {
+                shirtOrder[i] = 'M';
+            }
+            shirtOrder[5] = 'L';
+              
+            return shirtOrder;
         }
+        
 
         /*
         Another customer called in and is hosting a large networking event and
@@ -43,7 +55,20 @@ namespace Exercises
         */
         public char[] BuildBulkOrder(int numberOfShirts)
         {
-            return new char[] { };
+            if (numberOfShirts <= 0)
+            {
+                return new char[] { };
+            }
+            char[] bulkOrder = new char[numberOfShirts];
+            char[] sizes = { 'S', 'M', 'L' };
+            int sizeList = 0;
+
+            for (int i = 0; i < numberOfShirts; i++)
+            {
+                bulkOrder[i] = sizes[sizeList];
+                sizeList = (sizeList + 1) % sizes.Length;
+            }
+            return bulkOrder;
         }
 
         /*
@@ -61,6 +86,13 @@ namespace Exercises
         */
         public bool PlaceRequest(char[] order)
         {
+            for (int i = 0; i < order.Length; i++)
+            {
+                if (order[i] == 'S')
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }

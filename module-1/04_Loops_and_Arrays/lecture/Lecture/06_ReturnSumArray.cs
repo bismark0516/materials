@@ -1,4 +1,7 @@
-﻿namespace Lecture
+﻿using System;
+using System.Reflection;
+
+namespace Lecture
 {
     public partial class LectureProblem
     {
@@ -10,8 +13,15 @@
         {
             int[] arrayToLoopThrough = { 3, 4, 2, 9 };
 
+            int sumOfArrayToLoop = 0;
 
-            return 0;
+            for (int i =0; i < arrayToLoopThrough.Length; i++)
+            {
+                sumOfArrayToLoop += arrayToLoopThrough[i];
+            }
+             
+            return sumOfArrayToLoop;
         }
     }
 }
+
