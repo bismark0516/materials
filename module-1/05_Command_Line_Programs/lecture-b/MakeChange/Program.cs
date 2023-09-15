@@ -15,7 +15,17 @@ namespace MakeChange
         */
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            Console.Write("Please Enter the Total bill: ");
+            string billAmount = Console.ReadLine();
+            decimal bill = decimal.Parse(billAmount);
+
+            Console.Write("Please Enter the amount tendered: ");
+            string amountTendered = Console.ReadLine();
+            decimal tendered = decimal.Parse(amountTendered);
+
+            decimal change = tendered - bill;
+            Console.WriteLine("Your change is: " + change);
         }
     }
 }
