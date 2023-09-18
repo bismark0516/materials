@@ -15,7 +15,7 @@ namespace DecimalToBinary
                 int dValue = int.Parse(decimalS[i]);
                 string bValue = " ";
 
-                // here is where you need to do a nested for loop conversion
+                // here is where you need to do a nested for loop for the conversion
                 for (int j = 0; dValue > 0; j++)
                 {
                     int remainder = dValue % 2;

@@ -10,17 +10,7 @@ namespace Fibonacci
             string userInput = Console.ReadLine();
 
             int n = 0;
-            bool isNumeric = true;
-
-            for (int i = 0; i < userInput.Length && isNumeric; i++)
-            {
-                if (userInput[i] <'0' || userInput[i] > '9')
-                {
-                    isNumeric = false;
-                }
-            }
-            if (isNumeric)
-            {
+            
                 n = int.Parse(userInput);
 
                 Console.WriteLine("Fibonacci Sequence: ");
@@ -44,11 +34,6 @@ namespace Fibonacci
                     a = b;
                     b = c;
                 }
-            }
-            else
-            {
-                Console.WriteLine("Enter a positive number");
-            }
         }
     }
 }
