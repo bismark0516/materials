@@ -12,7 +12,14 @@
         */
         public string ComboString(string a, string b)
         {
-            return null;
+            if (a.Length < b.Length)
+            {
+            return a + b + a;
+            }
+            else
+            {
+            return b + a + b;
+            }
         }
     }
 }

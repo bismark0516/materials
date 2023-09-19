@@ -11,7 +11,11 @@
         */
         public string ExtraEnd(string str)
         {
-            return null;
+            string lastTwoChars = str.Substring(str.Length - 2);
+
+            string output = lastTwoChars + lastTwoChars + lastTwoChars;
+           
+            return output;
         }
     }
 }
