@@ -10,7 +10,25 @@
         */
         public int CountXX(string str)
         {
-            return 0;
+            int a = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i == str.Length - 1)
+                {
+                    
+                }
+
+                else if (str.Substring(i, 2) == "xx")
+                {
+                    a++;
+                }
+                else
+                {
+
+                }
+            }
+          return a ;
         }
     }
 }

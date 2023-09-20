@@ -10,6 +10,21 @@
         */
         public bool DoubleX(string str)
         {
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str.Substring(i, 1) == "x")
+                {
+                    if (i == str.Length - 1)
+                    {
+                        return false;
+                    }
+                    else if (str.Substring(i, 2) == "xx")
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                }
+            }
             return false;
         }
     }

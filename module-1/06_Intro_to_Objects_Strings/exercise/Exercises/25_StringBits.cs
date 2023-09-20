@@ -10,7 +10,16 @@
         */
         public string StringBits(string str)
         {
-            return null;
+            string result = "";
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    result += str[i];
+                }
+            }
+            return result;
         }
     }
 }

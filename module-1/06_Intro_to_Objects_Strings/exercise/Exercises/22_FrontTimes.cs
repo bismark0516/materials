@@ -1,4 +1,6 @@
-﻿namespace Exercises
+﻿using System.Diagnostics;
+
+namespace Exercises
 {
     public partial class StringExercises
     {
@@ -11,8 +13,20 @@
         */
         public string FrontTimes(string str, int n)
         {
-            return null;
-        }
+            string result = "";
+            for (int i = 0; i < n; i++)
+            {
+                if (str.Length < 3)
+                {
+                    result += str;
+                }
+                else
+                {
+                    result += str.Substring(0, 3);
+                }
+            }
+            return result;
 
+        }
     }
 }

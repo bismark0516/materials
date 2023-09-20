@@ -12,7 +12,11 @@ namespace Exercises
         */
         public string[] List2Array(List<string> stringList)
         {
-            return null;
+            // you can use .toArray here 
+            List<string> result = new List<string>();
+            string[] fruitArray = stringList.ToArray();
+          
+            return fruitArray;
         }
     }
 }

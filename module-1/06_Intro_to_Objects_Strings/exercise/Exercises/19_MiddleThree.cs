@@ -11,7 +11,15 @@
         */
         public string MiddleThree(string str)
         {
-            return null;
+            int midStart = str.Length / 2;
+            if (str.Length <= 3)
+            {
+                return str;
+            }
+            else
+            {
+                return str.Substring(midStart - 1, 3);
+            }
         }
     }
 }
