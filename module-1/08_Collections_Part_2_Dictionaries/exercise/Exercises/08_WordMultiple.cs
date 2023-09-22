@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Exercises
 {
@@ -15,7 +16,26 @@ namespace Exercises
          */
         public Dictionary<string, bool> WordMultiple(string[] words)
         {
-            return null;
+            Dictionary<string, bool> result = new Dictionary<string, bool>();
+            Dictionary<string, int> wordC = new Dictionary<string, int>();
+
+            foreach (string word in words)
+            {
+                if (wordC.ContainsKey(word))
+                {
+                    wordC[word]++;
+                }
+                else
+                {
+                    wordC[word] = 1;
+                }
+            }
+            foreach (KeyValuePair<string, int> pair in wordC)
+            {
+                result[pair.Key] = pair.Value >= 2;
+            }
+            return result;
+
         }
     }
 }

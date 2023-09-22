@@ -32,7 +32,7 @@ namespace TimerForAlgorighms2
 
                     // the code that you want to measure goes here
 
-                    Console.WriteLine("For " + howManyTimes + " times throught the loop:");
+                    Console.WriteLine("For " + howManyTimes + " times through the loop:");
 
                     for (int i = 0; i < howManyTimes; i++)
                     {
