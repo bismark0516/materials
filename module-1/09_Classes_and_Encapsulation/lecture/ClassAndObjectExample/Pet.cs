@@ -7,6 +7,7 @@ namespace ClassAndObjectExample
     public class Pet
     {
         private string ownerName;
+        private string petType;
         public string PetName { get; set; }
 
         public string Owner
@@ -27,15 +28,22 @@ namespace ClassAndObjectExample
                 }
             }
         }
-
+        public string PetType
+        {
+            get
+            {
+                return petType;
+            }
+        }
         public Pet()
         {
 
         }
 
-        public Pet(string petName)
+        public Pet(string petName, string petType)
         {
             PetName = petName;
+            this.petType = petType;
         }
 
         public string PetInfo()

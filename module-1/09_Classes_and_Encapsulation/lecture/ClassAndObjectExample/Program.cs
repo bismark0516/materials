@@ -19,7 +19,7 @@ namespace ClassAndObjectExample
             primrose.PetName = "Primrose";
             Console.WriteLine(primrose.PetInfo());
 
-            Pet gabriel = new Pet("Gabriel");
+            Pet gabriel = new Pet("Gabriel", "cat");
 
             Console.WriteLine(gabriel.PetName);
         } 

@@ -6,7 +6,9 @@ namespace Pets
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            UserInterface userInterface = new UserInterface();
+            userInterface.Run();
+
         }
     }
 }
