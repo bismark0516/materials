@@ -16,18 +16,23 @@ namespace InheritanceLecture
             this.buyoutAmount = buyoutAmount;
         }
 
-        public bool PlaceBuyoutBid( Bid bid)
+        //public bool PlaceBuyoutBid(Bid bid)
+
+
+        public override bool PlaceBid( Bid bid)
         {
             bool result = false;
 
             if (!HasEnded && bid.BidAmount >= buyoutAmount)
             {
-                PlaceBid(bid);
+                //PlaceBid(bid);
+                base.PlaceBid(bid);
                 HasEnded = true;
             }
             else if (!HasEnded)
             {
-                PlaceBid(bid);
+                //PlaceBid(bid);
+               base.PlaceBid(bid);
             }
             else
             {

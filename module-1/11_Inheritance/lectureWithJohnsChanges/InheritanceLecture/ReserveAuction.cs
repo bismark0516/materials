@@ -16,13 +16,17 @@ namespace InheritanceLecture
             this.reserveAmount = reserveAmount;
         }
 
-        public bool PlaceReserveBid(Bid bid)
+        //public bool PlaceReserveBid(Bid bid)
+
+        public override bool PlaceBid(Bid bid)
         {
             bool result = false;
 
             if (bid.BidAmount >= reserveAmount)
             {
-               result = PlaceBid(bid);
+
+                //result = PlaceBid(bid);
+                result = base.PlaceBid(bid);
             }
             else
             {

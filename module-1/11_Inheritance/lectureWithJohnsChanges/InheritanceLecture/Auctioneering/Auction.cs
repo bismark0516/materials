@@ -41,7 +41,11 @@ namespace InheritanceLecture.Auctioneering
         /// </summary>
         /// <param name="offeredBid">The bid to place.</param>
         /// <returns>True if the new bid is the current winning bid</returns>
-        public bool PlaceBid(Bid offeredBid)
+        /// 
+
+        //public bool PlaceBid(Bid offeredBid)
+
+        public virtual bool PlaceBid(Bid offeredBid)
         {
             bool result = false;
 
