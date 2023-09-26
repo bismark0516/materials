@@ -1,6 +1,6 @@
 ﻿namespace BankTellerExercise.Classes
 {
-    public class SavingsAccount: BankAccount
+    public class SavingsAccount : BankAccount
     {
         public SavingsAccount(string accountHolderName, string accountNumber) : base(accountHolderName, accountNumber)
         {
@@ -10,23 +10,27 @@
         {
 
         }
-        public override decimal Depoist(decimal amountToDeposit)
+        public override decimal Withdraw(decimal amountToWithdraw)
         {
-            if ()
             {
-                base.Deposit(amountToDeposit);
-            }
-            else
-            {
-                return Balance;
-            }
-            if ()
-            {
-                base.Deposit();
+                if (Balance - amountToWithdraw  < 2.00M || amountToWithdraw >Balance)
+                {
+                    return Balance;
+                }
+                else if (Balance - amountToWithdraw < 150.00M)
+                {
+                    base.Withdraw(2.00M + amountToWithdraw);
+                }
+                else 
+                {
+                    base.Withdraw(amountToWithdraw);
+                }
+               
             }
             return Balance;
         }
     }
 
 }
-}
+
+
