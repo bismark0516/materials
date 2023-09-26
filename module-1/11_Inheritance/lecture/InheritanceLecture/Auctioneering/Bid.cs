@@ -21,5 +21,10 @@
             this.Bidder = bidder;
             this.BidAmount = bidAmount;
         }
+
+        public override string ToString()
+        {
+            return $"{Bidder} - {BidAmount}";
+        }
     }
 }
