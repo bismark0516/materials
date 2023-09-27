@@ -3,7 +3,7 @@ namespace Lecture.Farming
     /// <summary>
     /// A base farm animal class.
     /// </summary>
-    public class FarmAnimal : ISingable
+    public abstract class FarmAnimal : ISingable
     {
         /// <summary>
         /// The farm animal's name.
@@ -18,13 +18,25 @@ namespace Lecture.Farming
         {
             get
             {
-                return sound;
+                if (IsAsleep)
+                {
+                    return "Burrrrrrrrrrr";
+                }
+                else
+                {
+                    return sound;
+                }
             }
             set
             {
                 sound = value;
             }
         }
+
+        ///<summary>
+        ///Is the animal asleep?
+        /// </summary>
+        public abstract bool IsAsleep { get; set; }
 
         /// <summary>
         /// Creates a new farm animal.
@@ -36,5 +48,12 @@ namespace Lecture.Farming
             Name = name;
             Sound = sound;
         }
+
+        public sealed override string ToString()
+        {
+            return Name + " - " + Sound;
+        }
+
+
     }
 }

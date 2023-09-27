@@ -33,7 +33,7 @@ If you open `Program`, you'll see there are several blocks of commented out code
 
 #### Step One: Implement the `Wall` class
 
-The `Wall` class can't be directly instantiated. It has two properties, `Name` and `Color`, that are readonly. Add a constructor that looks like this:
+The `Wall` class can't be directly instantiated. (maybe an abstract class) It has two properties, `Name` and `Color`, that are readonly. Add a constructor that looks like this:
 
 ``` csharp
 public Wall(string name, string color)
