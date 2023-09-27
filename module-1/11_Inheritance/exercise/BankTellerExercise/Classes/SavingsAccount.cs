@@ -13,7 +13,7 @@
         public override decimal Withdraw(decimal amountToWithdraw)
         {
             {
-                if (Balance - amountToWithdraw  < 2.00M || amountToWithdraw >Balance)
+                if (Balance - amountToWithdraw  < 2.00M || amountToWithdraw > Balance)
                 {
                     return Balance;
                 }

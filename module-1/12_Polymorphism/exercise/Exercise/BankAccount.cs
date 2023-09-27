@@ -1,6 +1,6 @@
 ﻿namespace Exercise
 {
-    public class BankAccount
+    public class BankAccount : IAccountable
     {
         public string AccountHolderName { get; private set; }
         public string AccountNumber { get; }
@@ -26,6 +26,12 @@
             {
                 Balance += amountToDeposit;
             }
+            return Balance;
+        }
+        public decimal TransferFunds(BankAccount destinationAccount, decimal transferAmount)
+        {
+            Withdraw(transferAmount);
+            destinationAccount.Deposit(transferAmount);
             return Balance;
         }
 
