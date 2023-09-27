@@ -49,5 +49,10 @@ namespace Lecture.Farming
             Name = name;
             Sound = sound;
         }
+
+        public sealed override string ToString()
+        {
+            return Name + " - " + Sound;
+        }
     }
 }
