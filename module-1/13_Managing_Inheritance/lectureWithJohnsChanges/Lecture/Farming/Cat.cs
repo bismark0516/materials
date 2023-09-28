@@ -13,5 +13,11 @@ namespace Lecture.Farming
         {
             IsAsleep = true;
         }
+        //public override string ToString()
+        //{
+
+        //    return "The animal is a " + Name + " and makes the sound" + Sound;
+          
+        //}
     }
 }

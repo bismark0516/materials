@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lecture.Farming
 {
-    public class FancyChicken :Chicken
-    {
-        public FancyChicken()
-        {
-            Sound = "Cluck if you don't mind";
-        }
-    }
+    //public class FancyChicken :Chicken
+    //{
+    //    public FancyChicken()
+    //    {
+    //        Sound = "Cluck if you don't mind";
+    //    }
+    //}
 }

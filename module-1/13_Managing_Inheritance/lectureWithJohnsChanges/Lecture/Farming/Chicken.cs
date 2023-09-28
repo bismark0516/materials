@@ -2,7 +2,7 @@
 
 namespace Lecture.Farming
 {
-    public class Chicken : FarmAnimal
+    public sealed class Chicken : FarmAnimal
     {
         public override bool IsAsleep { get; set; }
 

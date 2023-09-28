@@ -14,7 +14,7 @@ namespace Lecture
 
             ISingable[] singables = new ISingable[]
             {
-                new Cow(), new Chicken(), new Pig(), new Tractor(), new Cat(), new FancyChicken()
+                new Cow(), new Chicken(), new Pig(), new Tractor(), new Cat()
             };
 
             foreach(ISingable singable in singables)
