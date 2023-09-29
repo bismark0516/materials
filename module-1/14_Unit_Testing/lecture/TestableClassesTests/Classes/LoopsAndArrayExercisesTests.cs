@@ -14,6 +14,23 @@ namespace TestableClasses.Classes.Tests
         //.AreNotEquilavent() - Opposite or AreEqualivent
         //.Contains() - Checks to see if collection contains a value/object
 
+        [TestMethod]
+
+        public void MiddleWayTest()
+        {
+            //arrange
+
+            LoopsAndArrayExercises testObject = new LoopsAndArrayExercises();
+
+
+            //act
+           int[] result =  testObject.MiddleWay(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 });
+
+
+            //assert
+            CollectionAssert.AreEqual( new int[2,5] , result);
+        }
+
 
     }
 }
