@@ -10,8 +10,9 @@ namespace Exercises.Tests
     [TestClass]
     public class StringBitsTest
     {
+
         [TestMethod]
-        public void GetBitsTest()
+        public void GetBits()
         {
             //arrange
 
@@ -24,10 +25,9 @@ namespace Exercises.Tests
             //assert
 
             Assert.AreEqual("Hlo", result);
-
         }
         [TestMethod]
-        public void GetBitsTest_()
+        public void GetBits_()
         {
             //arrange
 
@@ -40,12 +40,9 @@ namespace Exercises.Tests
             //assert
 
             Assert.AreEqual("H", result);
-
-
-
         }
         [TestMethod]
-        public void GetBitsTest__()
+        public void GetBits__()
         {
             //arrange
 
@@ -58,7 +55,15 @@ namespace Exercises.Tests
             //assert
 
             Assert.AreEqual("Hello", result);
-
         }
+
+
+
+
+
+
+
+
+
     }
 }

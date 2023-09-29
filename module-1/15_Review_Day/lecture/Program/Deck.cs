@@ -4,23 +4,19 @@ using System.Text;
 
 namespace CardGame
 {
-    class Deck
+    public abstract class Deck
     {
         private List<Card> Cards { get; set; } = new List<Card>();
 
 
-        private string[] suits = { "Spades", "Diamonds", "Hearts", "Clubs" };
-        private string[] values = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
-       
-        public Deck ()
-        {
-            CreateDeck();
-        }
+        protected string[] Suits { get; } = { "Spades", "Diamonds", "Hearts", "Clubs" };
 
-        private void CreateDeck()
+        public abstract int HandSize { get; }
+
+        protected void CreateDeck(string[] values)
         {
 
-            foreach(string suit in suits)
+            foreach (string suit in Suits)
             {
                 foreach (string value in values)
                 {
@@ -31,7 +27,6 @@ namespace CardGame
 
         }
 
-
         public string DisplayDeck()
         {
             string result = "";
@@ -39,6 +34,7 @@ namespace CardGame
             foreach (Card item in Cards)
             {
                 result += item.ToString() + "\n";
+                //"\n" represents an escape sequence 
             }
 
             return result;
@@ -48,7 +44,7 @@ namespace CardGame
         {
             Random random = new Random();
 
-          for (int i = 0; i < Cards.Count; i++)
+            for (int i = 0; i < Cards.Count; i++)
             {
                 int j = random.Next(Cards.Count);
                 Card temp = Cards[i];

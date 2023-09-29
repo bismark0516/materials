@@ -17,6 +17,19 @@ Draw Poker - https://bicyclecards.com/how-to-play/basics-of-poker/
 - Players: 2 or more
 - Deal: 5 cards to each player, on at a time
 
+## User Stories: 
+
+- Allow the user to create a deck for Pinochle, Poker, or Eucher
+    - Allow the user to select a game 
+    - Create a deck that reflects the selected game.
+    - Create a deck that represents the selected game
+
+- Allow the user to select a number of players
+    - Allow the user to select a game 
+    - Create a deck that reflects the selected game.
+- Deal the cards for the selected game 
+    - Allow the user to select a game 
+    - Create a deck that reflects the selected game.
 
 
 
