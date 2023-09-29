@@ -30,6 +30,7 @@ namespace CardGame
                         DealACard();
                         break;
                     case "E":
+                    case "e":
                         done = true;
                         break;
                     default:
