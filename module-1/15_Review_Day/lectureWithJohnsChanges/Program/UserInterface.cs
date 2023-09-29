@@ -63,18 +63,17 @@ namespace CardGame
                 {
                     case "1":
                         deck = new PokerDeck();
-                        break;
+                        return;
                     case "2":
                         deck = new EucherDeck();
-                        break;
+                        return;
                     case "3":
                         deck = new PinochleDeck();
-                        break;
+                        return;
                    
                     case "R":
                     case "r":
-                        done = true;
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Please enter a valid choice");
                         Console.WriteLine();
@@ -101,8 +100,13 @@ namespace CardGame
             }
 
            //loop throught hands dealing cards
-
-
+           foreach (Hand hand in hands)
+            {
+                while (hand.HandCount < deck.HandSize)
+                {
+                    hand.Add(deck.DealACard());
+                }
+            }
         }
 
         private void ShuffleTheDeck()
@@ -137,10 +141,10 @@ namespace CardGame
         private void DisplayMenu()
         {
             Console.WriteLine("Please enter a choice: ");
-            Console.WriteLine("1: Choose a game:");
+            Console.WriteLine("1: Choose a game");
             Console.WriteLine("2: Display the deck");
             Console.WriteLine("3: Shuffle the deck");
-            Console.WriteLine("4: Deal a card");
+            Console.WriteLine("4: Deal cards");
             Console.WriteLine("E: End the program");
         }
     }

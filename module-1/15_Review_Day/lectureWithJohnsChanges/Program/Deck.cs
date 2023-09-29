@@ -8,7 +8,7 @@ namespace CardGame
     {
         private List<Card> Cards { get; set; } = new List<Card>();
 
-
+        public abstract int  HandSize {get;}
         protected string[] Suits { get; } = { "Spades", "Diamonds", "Hearts", "Clubs" };
 
         protected void CreateDeck(string[] values)
@@ -50,9 +50,22 @@ namespace CardGame
             }
         }
 
+        /// <summary>
+        /// Remove and return the card at the top of the deck
+        /// </summary>
+        /// <returns></returns>
         public Card DealACard()
         {
-            throw new NotImplementedException();
+            if (Cards.Count > 0)
+            {
+                Card temp = Cards[0];
+                Cards.RemoveAt(0);
+                return temp;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
