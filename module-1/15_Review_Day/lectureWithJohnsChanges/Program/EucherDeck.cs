@@ -8,7 +8,7 @@ namespace CardGame
     {
 
         private string[] values = { "A", "9", "10", "J", "Q", "K" };
-
+        public override int HandSize { get; } = 5;
         public EucherDeck()
         {
             CreateDeck(values);

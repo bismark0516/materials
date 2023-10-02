@@ -6,7 +6,20 @@ namespace CardGame
 {
     public class Hand
     {
-        List<Card> cards = new List<Card>();
+        private List<Card> cards = new List<Card>();
+
+        public int HandCount
+        {
+            get
+            {
+                return cards.Count;
+            }
+        }
+
+        public void Add (Card card)
+        {
+            cards.Add(card);
+        }
 
         public override string ToString()
         {
