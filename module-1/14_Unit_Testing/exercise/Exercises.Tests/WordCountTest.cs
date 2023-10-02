@@ -44,7 +44,7 @@ namespace Exercises.Tests
             Dictionary<string, int> result = testObject.GetCount(new string[] { "c", "b", "a" });
 
             //assert
-            CollectionAssert.AreEqual(new Dictionary<string, int> { { "c", 1 }, { "b", 1 }, { "c", 1 } }, result);
+            CollectionAssert.AreEqual(new Dictionary<string, int> { { "c", 1 }, { "b", 1 }, { "a", 1 } }, result);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Exercises.Tests
             Dictionary<string, int> result = testObject.GetCount(new string[] {});
 
             //assert
-            CollectionAssert.AreEqual(new Dictionary<string, int> { }, result);
+            CollectionAssert.AreEqual(new Dictionary<string, int> {}, result);
         }
     }
 }
