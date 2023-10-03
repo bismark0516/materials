@@ -8,20 +8,66 @@ namespace ExceptionHandlingLecture
 {
     public class UserInterface
     {
-        public void Run()
+        public void Run(string userName = "")
         {
-            Console.WriteLine("Enter 0 (zero) to divide by zero");
+            if(userName == "")
+            {
+                throw new ArgumentOutOfRangeException("Username cannot be the empty string");
+            }
 
-            // could generate a FormatException
-            string userInput = Console.ReadLine();
-            int zero = int.Parse(userInput);
+            if (String.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentException("Username is not valid");
+            }
 
-            // could generate a DivideByZeroException
-            int result = 27 / zero;
+            int zero = 0;
+            bool isInputValid = false;
+            while (!isInputValid )
+            {
+                Console.WriteLine($"{userName} Enter 0 (zero) to divide by zero");
 
-            // could generate an IndexOutOfRangeException
-            int[] anArray = new int[10];
-            anArray[result] = 34;
+                try
+                {
+                    // could generate a FormatException
+                    string userInput = Console.ReadLine();
+                    zero = int.Parse(userInput);
+                }
+                catch(FormatException ex)
+                {
+                    Console.WriteLine("Invalid input. Please enter digits. ");
+                    continue;
+                }
+                isInputValid = true;
+
+
+            }
+
+
+
+
+
+            int result = 10;
+            try
+            {
+                // could generate a DivideByZeroException
+                result = 27 / zero;
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("An Exception occured: " + ex.Message + " " + ex.StackTrace);
+            }
+
+
+            try
+            {
+                // could generate an IndexOutOfRangeException
+                int[] anArray = new int[10];
+                anArray[result] = 34;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("An Exception occured: " + ex.Message);
+            }
 
             // we will get here only if there are no exceptions
             Console.WriteLine("Thanks for playing our little game.");
