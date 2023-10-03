@@ -7,6 +7,9 @@ namespace Lecture
     {
         static void Main(string[] args)
         {
+            //FileAndDirectories.UsingTheDirectoryClass();
+
+            ReadingInFiles.ReadACharacterFile();
 
             Console.Write("Press enter to finish");
             Console.ReadLine();
