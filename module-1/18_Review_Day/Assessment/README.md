@@ -26,7 +26,7 @@ We understand this assessment can be difficult and may trigger anxiety, but this
 
 ## Instructions
 
-1. Open the project in the `17_Review_Day/Assessment` subdirectory.
+1. Open the project in the `18_Review_Day/Assessment` subdirectory.
 2. You should see the typical folder structure for a project with a skeleton application program `Main()` method.
 3. Any files you create should be placed in the correct folders within the project.
 4. Be sure to push your project when you are done or at the end of the assessment.
