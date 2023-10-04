@@ -22,8 +22,6 @@ namespace FindAndReplace
             Console.WriteLine("What is the destination file?");
             string destinationFile = Console.ReadLine();
 
-
-
             try
 
             {
@@ -36,9 +34,9 @@ namespace FindAndReplace
                         {
                             string line = sr.ReadLine();
 
-                            string newLine = line.Replace(searchWord,replacementWord);
-                            
-                           sw.WriteLine(newLine);
+                            string newLine = line.Replace(searchWord, replacementWord);
+
+                            sw.WriteLine(newLine);
                         }
                     }
 
