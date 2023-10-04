@@ -14,19 +14,18 @@ namespace Assessment
         }
         public override string ToString()
         {
-            string message = ($"Ticket {Name}{BasePrice}");
-            Console.WriteLine(message);
+            string message = ($"Ticket - {Name} - {BasePrice}");
+            
             return message;
         }
 
-      
 
         public static void Main()
         {
-            Console.WriteLine();
+            TicketPurchase tickets = new TicketPurchase("Bob", 14);
+            Console.WriteLine(tickets);
 
         }
-
 
 
     }

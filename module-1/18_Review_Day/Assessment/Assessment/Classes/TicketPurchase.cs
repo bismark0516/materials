@@ -23,7 +23,7 @@ namespace Assessment.Classes
             NumberOfTickets = numberOfTickets;
         }
 
-        public void TotalPrice(bool earlyCheckIn, bool priorityRideAccess)
+        public decimal TotalPrice(bool earlyCheckIn, bool priorityRideAccess)
         {
             decimal totalPrice = BasePrice;
 
@@ -40,9 +40,20 @@ namespace Assessment.Classes
             {
                 totalPrice = BasePrice + (NumberOfTickets * 50);
             }
-            else;
+           
+               return totalPrice;
+                
+
+
 
            
         }
+        public override string ToString()
+        {
+            string message = ($"Ticket - {Name} - {BasePrice}");
+
+            return message;
+        }
+
     }
 }
