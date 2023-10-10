@@ -1,18 +1,61 @@
+using Assessment.Classes;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Assessment.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ClassesTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TicketPurchaseTest()
         {
-            // There should be a test class to test the new class.
-            // You can rename this class or create a new class.
-            // If you create a new class, the UnitTest1 class can
-            // serve as a template for what's inside of
-            // the test class
+            //arrange create an instance of the class
+            TicketPurchase ticketPurchase = new TicketPurchase("Bill", 10);
+
+            //act call the method that is being tested 
+            decimal TotalPrice = ticketPurchase.TotalPrice(true, true);
+
+            //assert
+            Assert.AreEqual(((10 * 59.99M) + (10 * 10) + (10 * 50)), TotalPrice);
+
         }
+       
+        [TestMethod]
+
+        public void TicketPurchaseTest1()
+        {
+            //arrange create an instance of the class
+            TicketPurchase ticketPurchase = new TicketPurchase("Bob", 10);
+            //act call the method that is being tested 
+            decimal testObject = ticketPurchase.BasePrice;
+
+            //assert
+            Assert.AreEqual((10 * 59.99M), testObject);
+
+        }
+
+
+        [TestMethod]
+
+        public void TicketPurchaseTest2()
+        {
+            //arrange create an instance of the class
+            TicketPurchase ticketPurchase = new TicketPurchase("Bob", 10);
+
+            //act call the method that is being tested 
+            string name = ticketPurchase.Name;
+            int numberOfTickets = ticketPurchase.NumberOfTickets;
+
+            //assert
+            Assert.AreEqual("Bob", name);
+            Assert.AreEqual(10, numberOfTickets);
+            
+
+        }
+
     }
 }
+
+
+        
