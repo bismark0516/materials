@@ -102,3 +102,6 @@ Think about these questions as you work through the exercise:
 [database-normalization]: https://www.studytonight.com/dbms/database-normalization.php
 [how-to-select-the-right-data-type]: https://chartio.com/learn/amazon-redshift/how-to-select-the-right-data-types/
 [natural-or-surrogate-keys]: http://www.agiledata.org/essays/keys.html
+
+
+ 
