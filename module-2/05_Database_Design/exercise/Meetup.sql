@@ -24,7 +24,15 @@ CREATE TABLE [member] (
   email_reminder BIT NOT NULL,
  
   )
-   CREATE TABLE [Interest_Group](
+  CREATE TABLE [event_member](
+  member_id INT NOT NULL,
+  event_id INT NOT NULL,
+  CONSTRAINT [pkevent_memberkey] PRIMARY KEY (member_id,event_id)
+  )
+
+
+
+  CREATE TABLE [interest_group](
   group_id INT IDENTITY (1,1) PRIMARY KEY,
   group_name VARCHAR(255),
   CONSTRAINT [UQ_group_name] UNIQUE (group_name)
@@ -33,21 +41,24 @@ CREATE TABLE [member] (
   CREATE TABLE [member_interest_group] (
   member_id INT NOT NULL,
   group_id INT NOT NULL,
+ 
   )
 
   CREATE TABLE [member_group] (
-  group_id INT ,
-  member_id INT 
+  group_id INT NOT NULL,
+  member_id INT NOT NULL,
+  CONSTRAINT [PKmember_group_id]
+  PRIMARY KEY (group_id, member_id)
+  
  )
   
-
   CREATE TABLE [event](
-  event_id INT IDENTITY (1,1),
+  event_id INT IDENTITY (1,1) PRIMARY KEY,
   event_name VARCHAR(255),
   event_description VARCHAR(255),
   start_time DATETIME,
   event_length INT,
-  group_id INT REFERENCES Interest_Group(group_id)
+  group_id INT 
   )
   
  INSERT INTO [member] (last_name, first_name,phone_number,DOB,email_address, email_reminder)
@@ -66,6 +77,41 @@ CREATE TABLE [member] (
  VALUES  ('Thompson' , 'Louisa', '614-655-8575', '1996-08-12', 'louisa.thompson@gmail.com', 1)
  INSERT INTO [member] (last_name, first_name,phone_number,DOB,email_address,email_reminder)
  VALUES ('Fulton' , 'Marcus', '614-787-3245', '1926-05-18', 'marcus.fulton@gmail.com', 1)
+
+
+
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (1,1)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (2,2)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (3,3)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (4,4)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (5,3)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (6,2)
+ INSERT INTO [member_group] (member_id, group_id)
+ VALUES (7,1)
+
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (1,1)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (2,2)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (3,3)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (4,4)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (5,4)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (6,3)
+ INSERT INTO [member_interest_group] (member_id, group_id)
+ VALUES (7,2)
+
+
+
 
 
  INSERT INTO event (event_name, event_description, start_time, event_length)
@@ -93,14 +139,50 @@ VALUES ('Professional')
 INSERT INTO [Interest_Group] (group_name)
 VALUES ('Personal')
 
---UPDATE event SET event .group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'family') WHERE event_name = 'Music in the Park'
---UPDATE event SET group_id = '3' WHERE event_name = 'Tech Conference'
---UPDATE event SET group_id = '4' WHERE event_name = 'Art Exhibition Opening'
---UPDATE event SET group_id = '4' WHERE event_name = 'Charity Run'
---UPDATE event SET group_id = '1' WHERE event_name = 'Cooking Class'
---UPDATE event SET group_id = '1' WHERE event_name = 'Movie Night'
---UPDATE event SET group_id = '2' WHERE event_name = 'Book Club Meeting'
+--event updates--
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'family') WHERE event_name = 'Music in the Park'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name ='professional') WHERE event_name = 'Tech Conference'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'personal') WHERE event_name = 'Art Exhibition Opening'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'personal') WHERE event_name = 'Charity Run'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'friends') WHERE event_name = 'Cooking Class'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'family') WHERE event_name = 'Movie Night'
+UPDATE event SET event.group_id = (SELECT group_id FROM Interest_Group WHERE Interest_Group.group_name = 'friends') WHERE event_name = 'Book Club Meeting'
 
---ALTER TABLE [] WITH CHECK ADD CONSTRAINT [FK_state_city]
---FOREIGN KEY(capital) REFERENCES [city] (city_id)
---SELECT * FROM event
+--member group updates--
+ 
+ALTER TABLE [member_interest_group] 
+ADD CONSTRAINT [FK_member_id]
+FOREIGN KEY(member_id) REFERENCES [member] (member_id)
+
+ALTER TABLE [member_interest_group]
+ADD CONSTRAINT [FKmember_interest_group_id]
+FOREIGN KEY(group_id) REFERENCES [interest_group] (group_id)
+
+
+ALTER TABLE [member_group] 
+ADD CONSTRAINT [FKmember_group_member_id]
+FOREIGN KEY(member_id) REFERENCES [member] (member_id)
+
+ALTER TABLE [member_group] 
+ADD CONSTRAINT [FKmember_group_group_id]
+FOREIGN KEY(group_id) REFERENCES [interest_group] (group_id)
+
+ALTER TABLE [event_member] 
+ADD CONSTRAINT [FKevent_id]
+FOREIGN KEY(event_id) REFERENCES [event] (event_id)
+
+ALTER TABLE [event_member] 
+ADD CONSTRAINT [FKevent_member_group_id]
+FOREIGN KEY(member_id) REFERENCES [member] (member_id)
+
+ALTER TABLE [event] 
+ADD CONSTRAINT [check_event_length] CHECK 
+(event_length >= 30)
+
+SELECT * FROM member 
+SELECT * FROM member_interest_group
+SELECT * FROM member_group
+SELECT * FROM [event]
+SELECT * FROM Interest_Group
+
+
