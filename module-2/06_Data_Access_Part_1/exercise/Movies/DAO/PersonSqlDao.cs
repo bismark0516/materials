@@ -93,11 +93,15 @@ namespace Movies.DAO
         public List<Person> GetPersonsByCollectionName(string collectionName, bool useWildCard)
         {
             List<Person> person = new List<Person>();
-            string sql = "SELECT collection_name " +
-                "FROM movie " +
-                "JOIN person ON movie.director_ID " +
-                "JOIN [collection] ON movie.collection_id = [collection].collection_id" +
-                "WHERE collection_name ";
+            string sql = " SELECT person_id, person_name, birthday, deathday, biography, profile_path, person.home_page " +
+               "FROM collection " +
+               "JOIN movie " +
+               "ON movie.collection_id = collection.collection_id " +
+               "JOIN movie_actor " +
+               "ON movie.movie_id = movie_actor.movie_id " +
+               "JOIN person " +
+               "ON movie_actor.actor_id = person_id " +
+               "WHERE collection_name  ";
             if (useWildCard)
             {
                 collectionName = "%" + collectionName + "%";
