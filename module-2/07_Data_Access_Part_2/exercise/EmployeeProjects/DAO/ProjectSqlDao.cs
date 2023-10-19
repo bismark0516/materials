@@ -3,6 +3,7 @@ using EmployeeProjects.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 
 namespace EmployeeProjects.DAO
 {
@@ -19,21 +20,27 @@ namespace EmployeeProjects.DAO
         {
             Project project = null;
             string sql = "SELECT project_id, name, from_date, to_date FROM project WHERE project_id = @project_id;";
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@project_id", projectId);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    project = MapRowToProject(reader);
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@project_id", projectId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        project = MapRowToProject(reader);
+                    }
                 }
             }
-
+            catch(SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
             return project;
         }
 
@@ -41,18 +48,25 @@ namespace EmployeeProjects.DAO
         {
             List<Project> projects = new List<Project>();
             string sql = "SELECT project_id, name, from_date, to_date FROM project;";
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    Project project = MapRowToProject(reader);
-                    projects.Add(project);
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Project project = MapRowToProject(reader);
+                        projects.Add(project);
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
             }
 
             return projects;
@@ -60,27 +74,166 @@ namespace EmployeeProjects.DAO
 
         public Project CreateProject(Project newProject)
         {
-            throw new DaoException("CreateProject() not implemented");
+            Project project = new Project();
+            //Project result = null;
+            //Project project = null;
+
+            string sql = "INSERT INTO project (name, from_date, to_date) " +
+                         "OUTPUT INSERTED.project_id VALUES (@name, @from_date, @to_date);";
+
+            try
+            {
+                int newProjectId;
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@name", newProject.Name);
+                    cmd.Parameters.AddWithValue("@from_date", newProject.FromDate);
+                    cmd.Parameters.AddWithValue("@to_date", newProject.ToDate);
+
+
+                    newProjectId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                newProject = GetProjectById(newProjectId);
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+
+            return newProject;
         }
 
         public void LinkProjectEmployee(int projectId, int employeeId)
         {
-            throw new DaoException("LinkProjectEmployee() not implemented");
+            Project project = new Project();
+            int numberOfRows = 0;
+
+            string sql = "INSERT INTO project_employee" +
+                "(project_id, employee_id)" +
+                "VALUES ( @project_id,@employee_id) ";
+            try
+            {
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@project_id", projectId);
+                    cmd.Parameters.AddWithValue("@employee_id", employeeId);
+
+                    numberOfRows = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw new DaoException(ex.Message);
+            }
+
         }
 
         public void UnlinkProjectEmployee(int projectId, int employeeId)
         {
-            throw new DaoException("UnlinkProjectEmployee() not implemented");
-        }
+            Project project = new Project();
+            int numberOfRows = 0;
+
+            string sql = "DELETE FROM project_employee " +
+                "WHERE (project_id = @project_id AND employee_id  = @employee_id) ";
+            try
+            {
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@project_id", projectId);
+                    cmd.Parameters.AddWithValue("@employee_id", employeeId);
+
+                    numberOfRows = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw new DaoException(ex.Message);
+            }
+
+        }//department_id, first_name, last_name, birth_date, hire_date
 
         public Project UpdateProject(Project project)
         {
-            throw new DaoException("UpdateProject() not implemented");
+            Project updatedProject = new Project();
+
+            string sql = "UPDATE project SET name = @name, from_date = @from_date, to_date = @to_date WHERE project_id = @project_id;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@name", project.Name);
+                    cmd.Parameters.AddWithValue("@from_date", project.FromDate);
+                    cmd.Parameters.AddWithValue("@to_date", project.ToDate);
+                    cmd.Parameters.AddWithValue("@project_id", project.ProjectId);
+
+                    int numberOfRows = cmd.ExecuteNonQuery();
+                    if (numberOfRows == 0)
+                    {
+                        return null;
+                    }
+                }
+                updatedProject = GetProjectById(project.ProjectId);
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+
+            return updatedProject;
         }
 
         public int DeleteProjectById(int projectId)
         {
-            throw new DaoException("DeleteProjectById() not implemented");
+            int numberOfRows = 0;
+            string sql2 = "DELETE FROM project_employee WHERE project_employee.project_id = @project_id;";
+            string sql = "DELETE FROM project WHERE project_id = @project_id;";
+            string sql3 = "DELETE FROM employee WHERE employee_id = @project_id";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd2 = new SqlCommand(sql2, conn);
+                    cmd2.Parameters.AddWithValue("@project_id", projectId);
+                    cmd2.ExecuteNonQuery();
+
+                    SqlCommand cmd3 = new SqlCommand(sql3, conn);
+                    cmd3.Parameters.AddWithValue("@project_id", projectId);
+                    cmd3.ExecuteNonQuery();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@project_id", projectId);
+                    numberOfRows = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+            return numberOfRows;
         }
 
         private Project MapRowToProject(SqlDataReader reader)

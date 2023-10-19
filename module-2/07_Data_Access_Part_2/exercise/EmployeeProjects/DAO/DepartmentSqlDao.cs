@@ -17,27 +17,32 @@ namespace EmployeeProjects.DAO
 
         public Department GetDepartmentById(int departmentId)
         {
+
             Department department = null;
 
             string sql = @"SELECT department_id, name FROM department 
                            WHERE department_id = @department_id;";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@department_id", ((object)departmentId ?? DBNull.Value));
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    department = MapRowToDepartment(reader);
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@department_id", ((object)departmentId ?? DBNull.Value));
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        department = MapRowToDepartment(reader);
+                    }
                 }
             }
-
-
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
             return department;
         }
 
@@ -46,39 +51,126 @@ namespace EmployeeProjects.DAO
             List<Department> departments = new List<Department>();
 
             string sql = "SELECT department_id, name FROM department;";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    Department department = MapRowToDepartment(reader);
-                    departments.Add(department);
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Department department = MapRowToDepartment(reader);
+                        departments.Add(department);
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
             }
             return departments;
         }
 
         public Department CreateDepartment(Department department)
         {
-            throw new DaoException("CreateDepartment() not implemented");
+            Department department1 = new Department();
+            string sql = "INSERT INTO department (name) " +
+              "OUTPUT INSERTED.department_id VALUES (@name);";
+
+            try
+            {
+                int newDepartmentID;
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@name", department.Name);
+
+                    newDepartmentID = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                department1 = GetDepartmentById(newDepartmentID);
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+
+            return department1;
         }
+
 
         public Department UpdateDepartment(Department department)
         {
-            throw new DaoException("UpdateDepartment() not implemented");
+            Department department1 = new Department();
+
+            string sql = "UPDATE department SET name = @name  WHERE department_id = @department_id;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@name", department.Name);
+                    cmd.Parameters.AddWithValue("@department_id", department.DepartmentId);
+
+                    int numberOfRows = cmd.ExecuteNonQuery();
+                    if (numberOfRows == 0)
+                    {
+                        return null;
+                    }
+                }
+                department1 = GetDepartmentById(department.DepartmentId);
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+            return GetDepartmentById(department.DepartmentId);
+
         }
 
         public int DeleteDepartmentById(int id)
         {
-            throw new DaoException("DeleteDepartmentById() not implemented");
-        }
+            int numberofRows = 0;
+            int numberOfR = 0;
 
+            string sql = "DELETE FROM department WHERE department_id = @department_id;";
+            string sql2 = "UPDATE employee SET department_id = 0 WHERE department_id = @department_id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd2 = new SqlCommand(sql2, conn);
+                    cmd2.Parameters.AddWithValue("@department_id", id);
+                    numberofRows = cmd2.ExecuteNonQuery();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@department_id", id);
+
+                    numberOfR = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException(ex.Message);
+            }
+            return numberOfR;
+
+
+
+
+
+        }
         private Department MapRowToDepartment(SqlDataReader reader)
         {
             Department department = new Department();

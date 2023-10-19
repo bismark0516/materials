@@ -128,8 +128,41 @@ namespace USCitiesAndParks.DAO
 
         public Park CreatePark(Park park)
         {
-            throw new DaoException("CreatePark() not implemented");
+            Park result = null;
+            string sql = "INSERT INTO park " +
+                "(park_name, date_established, area, has_camping) "
+                + "VALUES (@park_name, @date_established, @area, @has_camping);";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@park_name", park.ParkName);
+                        cmd.Parameters.AddWithValue("@date_established", park.DateEstablished);
+                        cmd.Parameters.AddWithValue("@area", park.Area);
+                        cmd.Parameters.AddWithValue("@has_camping", park.HasCamping);
+                        int count = cmd.ExecuteNonQuery();
+
+                        if (count == 0)
+                        {
+                            return result;
+                        }
+                        else
+                        {
+
+                        }
+
+
+
+                    }
+                }
+            }
+            
+            return result;
         }
+        
 
         public Park UpdatePark(Park park)
         {
