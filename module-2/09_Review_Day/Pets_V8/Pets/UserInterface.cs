@@ -9,8 +9,13 @@ namespace PetInfo
 {
     class UserInterface
     {
-        private PetDao pets = new PetDao();
+        string connectionString = @"Server=.\SQLEXPRESS;Database=PetInfo;Trusted_Connection=True;";
+        private PetDao pets;
 
+        public UserInterface()
+        {
+            pets = new PetDao(connectionString);
+        }
         public void Run()
         {
             bool isDone = false;
