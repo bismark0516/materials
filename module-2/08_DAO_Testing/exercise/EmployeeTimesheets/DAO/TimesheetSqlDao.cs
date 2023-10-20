@@ -45,7 +45,7 @@ namespace EmployeeTimesheets.DAO
             return timesheet;
         }
 
-        public List<Timesheet> GetTimesheetsByEmployeeId(int employeeId)
+        public List<Timesheet> GetTimesheetsByEmployeeId(int employeeId) //needs a while loop here to continually go through all of the employees
         {
             List<Timesheet> timesheets = new List<Timesheet>();
             string sql = @"SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, is_billable, description 
@@ -63,7 +63,7 @@ namespace EmployeeTimesheets.DAO
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Timesheet timesheet = MapRowToTimesheet(reader);
                         timesheets.Add(timesheet);
@@ -78,12 +78,12 @@ namespace EmployeeTimesheets.DAO
             return timesheets;
         }
 
-        public List<Timesheet> GetTimesheetsByProjectId(int projectId)
+        public List<Timesheet> GetTimesheetsByProjectId(int projectId) //where project_id = @project_id
         {
             List<Timesheet> timesheets = new List<Timesheet>();
             string sql = @"SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, is_billable, description 
                                                 FROM timesheet 
-                                                WHERE employee_id = @project_id 
+                                                WHERE project_id = @project_id 
                                                 ORDER BY timesheet_id;";
             try
             {
@@ -142,11 +142,11 @@ namespace EmployeeTimesheets.DAO
 
             return GetTimesheetById(timesheetId);
         }
-        public Timesheet UpdateTimesheet(Timesheet timesheet)
+        public Timesheet UpdateTimesheet(Timesheet timesheet)// needs is_billable into the query
         {
             string sql = @"UPDATE timesheet 
                           SET employee_id = @employee_id, project_id = @project_id, date_worked = @date_worked, 
-                          hours_worked = @hours_worked, description = @description 
+                          hours_worked = @hours_worked, description = @description, is_billable = @is_billable
                           WHERE timesheet_id = @timesheet_id;";
             try
             {
@@ -200,12 +200,12 @@ namespace EmployeeTimesheets.DAO
             }
         }
 
-        public decimal GetBillableHours(int employeeId, int projectId)
+        public decimal GetBillableHours(int employeeId, int projectId) //billable hours doesn't account for false 
         {
-            decimal billableHours = 0;
+            decimal billableHours = 0.0M;
             string sql = @"SELECT SUM(hours_worked) AS billable_hours 
                            FROM timesheet 
-                           WHERE employee_id = @employee_id AND project_id = @project_id;";
+                           WHERE employee_id = @employee_id AND project_id = @project_id AND is_billable = 1;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))

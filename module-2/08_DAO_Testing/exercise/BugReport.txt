@@ -1,43 +1,46 @@
+
 Bug 1
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: GetBillableHours_Returns_Correct_Total()
 
-Expected output:
+Expected output: 0
 
-Actual output:
+Actual output:2 
 
-How did you fix this bug?
+How did you fix this bug? billiable hours doesn't not account for falsehoods
 
 
 Bug 2
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: GetTimesheetsByProjectId_With_Valid_Project_Id_Returns_List_Of_Timesheets_For_Project()
 
-Expected output:
+Expected output: 3
 
-Actual output:
+Actual output: 2
 
-How did you fix this bug?
+How did you fix this bug? project_id needs to equal @project_id
 
 
-Bug 3
+Bug 3  UpdateTimesheet_Updates_Timesheet()
 -----
 Test that demonstrates problem:
 
-Expected output:
+Expected output: true
 
-Actual output:
+Actual output: false
 
-How did you fix this bug?
-
+How did you fix this bug? billiable is missing in the query
 
 Bug 4
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: GetTimesheetsByEmployeeId_With_Valid_Employee_Id_Returns_List_Of_Timesheets_For_Employee()
 
-Expected output:
+Expected output:2
 
-Actual output:
+Actual output:1
 
 How did you fix this bug?
+input while loop instead of an if statement 
+
+
 

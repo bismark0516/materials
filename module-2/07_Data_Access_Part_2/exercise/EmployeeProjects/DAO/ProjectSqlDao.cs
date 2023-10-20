@@ -207,7 +207,7 @@ namespace EmployeeProjects.DAO
             int numberOfRows = 0;
             string sql2 = "DELETE FROM project_employee WHERE project_employee.project_id = @project_id;";
             string sql = "DELETE FROM project WHERE project_id = @project_id;";
-            string sql3 = "DELETE FROM employee WHERE employee_id = @project_id";
+            //string sql3 = "DELETE FROM employee WHERE employee_id = @project_id";
 
             try
             {
@@ -219,9 +219,9 @@ namespace EmployeeProjects.DAO
                     cmd2.Parameters.AddWithValue("@project_id", projectId);
                     cmd2.ExecuteNonQuery();
 
-                    SqlCommand cmd3 = new SqlCommand(sql3, conn);
-                    cmd3.Parameters.AddWithValue("@project_id", projectId);
-                    cmd3.ExecuteNonQuery();
+                    //SqlCommand cmd3 = new SqlCommand(sql3, conn);
+                    //cmd3.Parameters.AddWithValue("@project_id", projectId);
+                    //cmd3.ExecuteNonQuery();
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@project_id", projectId);
