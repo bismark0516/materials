@@ -147,16 +147,7 @@ namespace USCitiesAndParks.DAO
                         cmd.Parameters.AddWithValue("@area", park.Area);
                         cmd.Parameters.AddWithValue("@has_camping", park.HasCamping);
 
-                        //int count = cmd.ExecuteNonQuery();
-
-                        //if (count == 0)
-                        //{
-                        //    return result;
-                        //}
-                        //else
-                        //{
-
-                        //}
+                       
 
                         int park_id = (int)cmd.ExecuteScalar();
                         park.ParkId = park_id;
