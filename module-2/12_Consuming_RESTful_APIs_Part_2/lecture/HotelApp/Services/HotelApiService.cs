@@ -36,7 +36,7 @@ namespace HotelReservationsClient.Services
                 url = $"hotels/{hotelId}/reservations";
             }
             else
-            { 
+            {
                 url = "reservations";
             }
 
@@ -58,17 +58,38 @@ namespace HotelReservationsClient.Services
 
         public Reservation AddReservation(Reservation newReservation)
         {
-            throw new NotImplementedException();
+            RestRequest request = new RestRequest("reservations");
+            request.AddJsonBody(newReservation);
+
+            IRestResponse<Reservation> response = client.Post<Reservation>(request);
+            CheckForError(response, $"Add reservation");
+
+            return response.Data;
+
         }
 
         public Reservation UpdateReservation(Reservation reservationToUpdate)
         {
-            throw new NotImplementedException();
+
+            RestRequest request = new RestRequest($"reservations/ {reservationToUpdate.Id}");
+            request.AddJsonBody(reservationToUpdate);
+
+            IRestResponse<Reservation> response = client.Put<Reservation>(request);
+            CheckForError(response, $"Update reservation");
+
+            return response.Data;
+
         }
 
         public bool DeleteReservation(int reservationId)
+        //first create a request that takes in the url and the variable you are trying to act on 
         {
-            throw new NotImplementedException();
+            RestRequest request = new RestRequest("reservations/" + reservationId);
+            IRestResponse response = client.Delete(request);
+
+            CheckForError(response, $"Delete reservation {reservationId}");
+
+            return true;
         }
 
         /// <summary>
@@ -79,11 +100,15 @@ namespace HotelReservationsClient.Services
         /// <param name="action">Description of the action the application was taking. Written to the log file for context.</param>
         private void CheckForError(IRestResponse response, string action)
         {
+            if (response.ResponseStatus != ResponseStatus.Completed)
+            {
+                throw new HttpRequestException($"Unable to reach the server" + action);
+            }
             if (!response.IsSuccessful)
             {
                 // TODO: Write a log message for future reference
 
-                throw new HttpRequestException($"There was an error in the call to the server");
+                throw new HttpRequestException($"There was an error in the call to the server: " + (int)response.StatusCode + " " + action);
             }
 
         }

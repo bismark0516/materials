@@ -115,14 +115,6 @@
   ],
   "reservations": [
     {
-      "id": 701,
-      "hotelId": 1,
-      "fullName": "Alex Gilbert",
-      "checkinDate": "2023-11-06",
-      "nights": 2,
-      "guests": 2
-    },
-    {
       "id": 702,
       "hotelId": 1,
       "fullName": "Jo Andreas",
