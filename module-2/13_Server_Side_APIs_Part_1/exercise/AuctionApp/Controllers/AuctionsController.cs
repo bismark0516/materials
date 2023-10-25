@@ -35,15 +35,15 @@ namespace AuctionApp.Controllers
             {
                 return dao.GetAuctionsByTitleAndMaxBid(title_like, currentBid_lte);
             }
-            else if (title_like == "" && currentBid_lte == 0)
+            if (title_like == "" && currentBid_lte == 0)
             {
                 return dao.GetAuctions();
             }
-            else if (title_like != "")
+            if (title_like != "")
             {
                 return dao.GetAuctionByTitle(title_like);
             }
-            else if (currentBid_lte > 0d)
+            if (currentBid_lte > 0d)
             {
                 return dao.GetAuctionsByMaxBid(currentBid_lte);
             }
@@ -66,7 +66,7 @@ namespace AuctionApp.Controllers
         {
             return dao.CreateAuction(auction);
         }
-                
+
     }
 }
 
