@@ -29,15 +29,15 @@ namespace PetInfoClient
                 MainMenu();
                 string menuSelection = console.PromptForString("Please choose an option");
 
-                if (menuSelection == "Z")
+                if (menuSelection.ToUpper() == "Z")
                 {
                     // Exit the loop
                     break;
                 }
 
-                else if (menuSelection == "W")
+                else if (menuSelection.ToUpper() == "W")
                 {
-                    // List hotels
+                    // Show Weather
                     ShowWeather();
                 }
 
@@ -45,9 +45,6 @@ namespace PetInfoClient
                 {
                     Console.WriteLine("Please try again");
                 }
-
-               
-
             }
         }
 
@@ -63,6 +60,8 @@ namespace PetInfoClient
             try
             {
                 List<WeatherForecast> forecasts = weatherForecastApiService.GetForcasts();
+
+                Console.WriteLine();
 
                 foreach (WeatherForecast forecast in forecasts)
                 {

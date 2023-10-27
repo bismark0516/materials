@@ -3,7 +3,7 @@
     "PetInfoServer": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "ready",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
