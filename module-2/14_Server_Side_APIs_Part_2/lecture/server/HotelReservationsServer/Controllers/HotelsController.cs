@@ -43,7 +43,7 @@ namespace HotelReservations.Controllers
             }
             else
             {
-                return NotFound();
+                return StatusCode(404, "No hotel was found");
             }
         }
     }

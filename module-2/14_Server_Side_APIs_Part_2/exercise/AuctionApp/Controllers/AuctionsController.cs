@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AuctionApp.Models;
 using AuctionApp.DAO;
+using AuctionApp.Exceptions;
 
 namespace AuctionApp.Controllers
 {
@@ -48,7 +49,35 @@ namespace AuctionApp.Controllers
         [HttpPost]
         public ActionResult<Auction> Create(Auction auction)
         {
-            return dao.CreateAuction(auction);
+            Auction auctions = dao.CreateAuction(auction);
+            return Created($"/auctions/{auctions.Id}", auctions);
+        }
+
+        [HttpPut("/auctions/{id}")]
+        public ActionResult<Auction> Update(Auction auctions, int id)
+        {
+            auctions.Id = id;
+            try
+            {
+                Auction auction = dao.UpdateAuction(auctions);
+                return Ok(auction);
+
+            }
+            catch (DaoException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Auction> Delete(int id)
+        {
+            int delete = dao.DeleteAuctionById(id);
+            if(delete == 1)
+            {
+                return NoContent();
+            }
+            return NotFound();
         }
     }
 }
