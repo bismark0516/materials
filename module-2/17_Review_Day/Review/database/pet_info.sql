@@ -18,6 +18,7 @@ CREATE TABLE petinfo_user (
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	salt varchar(200) NOT NULL,
+	[role] varchar(20) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id),
 	CONSTRAINT UQ_username UNIQUE (username)
 )

@@ -21,12 +21,29 @@ namespace PetInfoServer.Controllers
             this.userDao = userDao;
         }
 
+        //GET /
         [HttpGet("/")]
         public ActionResult<string> Ready()
         {
             return Ok("Server is ready!");
         }
 
+        //GET /whoami
+        [HttpGet("/whoami")]
+        public ActionResult<string> WhoAmI()
+        {
+            string result = User.Identity.Name;
+            if (result == null)
+            {
+                return "No token provided.";
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        // POST /login
         [HttpPost]
         public IActionResult Authenticate(LoginUser userParam)
         {
@@ -61,6 +78,7 @@ namespace PetInfoServer.Controllers
             return result;
         }
 
+        // POST /login/register
         [HttpPost("register")]
         public IActionResult Register(LoginUser userParam)
         {
