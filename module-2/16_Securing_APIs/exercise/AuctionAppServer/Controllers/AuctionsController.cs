@@ -9,6 +9,7 @@ namespace AuctionApp.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AuctionsController : ControllerBase
     {
         private readonly IAuctionDao auctionDao;
@@ -19,6 +20,7 @@ namespace AuctionApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public List<Auction> List(string title_like = "", double currentBid_lte = 0)
         {
             if (title_like != "")
@@ -48,6 +50,8 @@ namespace AuctionApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "creator, admin")]
+        
         public ActionResult<Auction> Create(Auction auction)
         {
             Auction returnAuction = auctionDao.CreateAuction(auction);
@@ -55,6 +59,7 @@ namespace AuctionApp.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "creator, admin")]
         public ActionResult<Auction> Update(int id, Auction auction)
         {
             // The id on the URL takes precedence over the one in the payload, if any
@@ -73,6 +78,7 @@ namespace AuctionApp.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             int numDeleted = auctionDao.DeleteAuctionById(id);
@@ -89,7 +95,8 @@ namespace AuctionApp.Controllers
         [HttpGet("whoami")]
         public ActionResult WhoAmI()
         {
-            return Ok("");
+                string userName = User.Identity.Name;
+                return Ok(userName);
         }
     }
 }
