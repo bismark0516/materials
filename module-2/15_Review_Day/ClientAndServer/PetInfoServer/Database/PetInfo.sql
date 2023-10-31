@@ -31,9 +31,7 @@ CREATE TABLE Owner (
 	CONSTRAINT PK_owner_id PRIMARY KEY (id)
 );
 
-ALTER TABLE Pet
-ADD CONSTRAINT FK_pet_id_owner_id 
-FOREIGN KEY (owner) REFERENCES Owner(id);
+
 
 SET IDENTITY_INSERT Pet ON 
 INSERT INTO Pet (id, name, age, type, owner) VALUES (1, 'Bella', 6, 'dog', 1);
@@ -47,4 +45,6 @@ INSERT INTO Owner (id, name, email) VALUES (1, 'John', 'john@johnfulton.org');
 INSERT INTO Owner (id, name, email) VALUES (2, 'Lisa', 'lisa@bruegge-fulton.org');
 SET IDENTITY_INSERT Owner Off 
 
-
+ALTER TABLE Pet
+ADD CONSTRAINT FK_pet_id_owner_id 
+FOREIGN KEY (owner) REFERENCES Owner(id);
