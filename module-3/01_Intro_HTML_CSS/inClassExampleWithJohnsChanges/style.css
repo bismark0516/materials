@@ -1,0 +1,23 @@
+span{
+    background-color: lightblue;
+    font-size: 14pt;
+}
+
+a{
+    color: purple;
+    text-decoration: none;
+}
+
+div {
+    background-color: green;
+    text-decoration: underline;
+}
+
+.last{
+    background-color: brown;
+    color: white;
+}
+
+#form{
+    background-color: yellowgreen;
+}
