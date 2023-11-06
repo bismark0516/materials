@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using PetInfoClient.Models;
 using PetInfoClient.Services;
 
@@ -9,20 +10,14 @@ namespace PetInfoClient
 
     {
         private readonly AuthenticatedApiService authenticatedApiService;
-<<<<<<< HEAD
         private readonly PetApiService petApiService;
-=======
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
         private readonly ConsoleService console = new ConsoleService();
         private readonly PetInfoConsoleService petInfoConsole = new PetInfoConsoleService();
 
         public PetInfoApp(string apiUrl)
         {
             authenticatedApiService = new AuthenticatedApiService(apiUrl);
-<<<<<<< HEAD
             petApiService = new PetApiService(apiUrl);
-=======
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
         }
 
         public void Run()
@@ -83,17 +78,14 @@ namespace PetInfoClient
 
             if (menuSelection == 1)
             {
-<<<<<<< HEAD
-                // list Pets
+                // List pets
                 ListPets();
-=======
-                // View your current balance
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
             }
 
             if (menuSelection == 2)
             {
-                // View your past transfers
+                // Delete a Pet
+                DeleteAPet();
             }
 
             if (menuSelection == 3)
@@ -121,20 +113,40 @@ namespace PetInfoClient
             return true;    // Keep the main menu loop going
         }
 
-<<<<<<< HEAD
         private void ListPets()
         {
+
             List<Pet> pets = petApiService.GetPets();
-            foreach (Pet pet in pets)
+
+            foreach(Pet pet in pets)
             {
                 Console.WriteLine(pet);
             }
-            Console.WriteLine();
+
             console.Pause();
         }
 
-=======
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
+        private void DeleteAPet()
+        {
+            try
+            {
+                ListPets();
+
+                Console.WriteLine("Enter pet number to delete: ");
+                int response = int.Parse(Console.ReadLine());
+
+                petApiService.DeleteAPet(response);
+
+                Console.WriteLine("Pet deleted.");
+                console.Pause();
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Pet not deleted.");
+                Console.WriteLine("Error: " + ex.Message);
+            }
+        }
+
         private void Login()
         {
             LoginUser loginUser = petInfoConsole.PromptForLogin();

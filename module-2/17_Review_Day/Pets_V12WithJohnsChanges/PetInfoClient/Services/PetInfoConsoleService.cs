@@ -25,12 +25,8 @@ namespace PetInfoClient.Services
             Console.Clear();
             Console.WriteLine("");
             Console.WriteLine($"Hello, {username}!");
-<<<<<<< HEAD
             Console.WriteLine("1: List Pets");
-=======
-            Console.WriteLine("1: ");
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
-            Console.WriteLine("2: ");
+            Console.WriteLine("2: Delete a Pet");
             Console.WriteLine("3: ");
             Console.WriteLine("4: ");
             Console.WriteLine("5: ");

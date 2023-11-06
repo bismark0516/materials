@@ -13,11 +13,7 @@ namespace PetInfoServer.DAO
         private readonly string connectionString;
         const decimal StartingBalance = 1000M;
 
-<<<<<<< HEAD
-        public UserSqlDao(string dbConnectionString) 
-=======
         public UserSqlDao(string dbConnectionString)
->>>>>>> 8ce8cdd58186e5c10dff668566049df1796620b6
         {
             connectionString = dbConnectionString;
         }

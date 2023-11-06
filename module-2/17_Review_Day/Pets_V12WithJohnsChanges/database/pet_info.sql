@@ -22,6 +22,7 @@ CREATE TABLE petinfo_user (
 	CONSTRAINT PK_user PRIMARY KEY (user_id),
 	CONSTRAINT UQ_username UNIQUE (username)
 )
+
 CREATE TABLE Pet (
     id   INT NOT NULL IDENTITY (1,1),
 	name NVARCHAR(60) NOT NULL,
@@ -53,4 +54,3 @@ SET IDENTITY_INSERT Owner Off
 ALTER TABLE Pet
 ADD CONSTRAINT FK_pet_id_owner_id 
 FOREIGN KEY (owner) REFERENCES Owner(id);
-
