@@ -1,0 +1,32 @@
+a{
+    color: blue;
+    text-decoration: underline;
+}
+.italizes{
+    font-style: italic;
+}
+.link{
+    list-style: bullet;
+    display: block;
+    margin-bottom: 10px;
+    
+}
+#links-section h2 {
+    text-decoration: underline;
+
+}
+body{
+    background-color: lightgray;
+}
+header{
+    text-align: center;
+}
+#quotes-section h2{
+    text-decoration: underline;
+}
+#facts-section h2{
+    text-decoration: underline;
+}
+form{
+    background-color: lightgray;
+}
