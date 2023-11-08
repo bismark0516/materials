@@ -9,9 +9,83 @@ html {
 
 body {
   background-color: rgba(192, 192, 192, 0.1);
+  margin: 0;
+  padding: 0;
 }
 
 ul {
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+aside {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  border-right: 1px solid rgba(0, 173, 238, 0.4);
+}
+
+aside img {
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+main {
+  margin-left: 200px;
+  padding-left: 20px;
+  padding-right: 20px
+}
+
+nav li {
+  text-align: center;
+  text-transform: uppercase;
+  width: 49%;
+  border-bottom: 1px solid rgba(0, 173, 238, 0.4);
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+nav li a {
+
+  font-weight: bold;
+  text-decoration: none;
+  color: #00ADEE;
+  line-height: 1.5;
+  font-size: .8rem;
+  white-space: nowrap;
+}
+
+nav li:first-child a {
+  text-decoration: underline;
+}
+
+header img {
+  height: 100px;
+  padding-bottom: 5px;
+  margin-left: 20px;
+}
+
+#placeholder img {
+  max-width: 100%;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+section div {
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
+  border-right: 1px solid rgba(170, 239, 135, 0.8);
+  padding: 10px
+}
+
+section h2{
+  color: #8CC36F;
+  margin-right: 10px;
+}
+section div h2 i{
+  margin-right: 20px;
 }
