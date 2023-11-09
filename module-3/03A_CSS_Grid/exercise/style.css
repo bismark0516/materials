@@ -170,7 +170,7 @@ header img {
     #experience-grid {
         display: grid;
         grid-area: experience-Grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 10px;
         grid-template-areas:
             "experience-code "
