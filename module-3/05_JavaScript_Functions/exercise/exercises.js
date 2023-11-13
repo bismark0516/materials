@@ -20,6 +20,22 @@
  * @returns {boolean} true if they are admitted
  */
 
+
+function isAdmitted(gpa, satScore = 0, recommendation = false) {
+    if (gpa >= 4.0 || satScore > 1300) {
+        return true;
+    }
+    else if ((gpa > 3.0 && recommendation) || (satScore > 1200 && recommendation)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+
+
 /**
  * Write a function called useParameterToFilterArray that accepts a filter function
  * as a parameter. Use this function to filter unfilteredArray and return the result.
@@ -27,7 +43,15 @@
  * @param {function} filterFunction the function to filter with
  * @returns {number[]} the filtered array
  */
-let unfilteredArray = [1, 2, 3, 4, 5, 6];
+function useParameterToFilterArray(filterFunction) {
+
+    let unfilteredArray = [1, 2, 3, 4, 5, 6];
+
+    const number = unfilteredArray.filter(filterFunction)
+
+    return number;
+}
+
 
 /**
  * Write a function called makeNumber that takes two strings
@@ -42,6 +66,11 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * @returns {number} the resultant number
  */
 
+function makeNumber(first, second) {
+    const result = parseInt(first + second);
+    return result;
+}
+
 /**
  * Write a function called addAll that takes an unknown number of parameters
  * and adds all of them together. Return the sum.
@@ -49,12 +78,32 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * @param {...number} num a series of numbers to add together
  * @returns {number} the sum of all the parameters (or arguments)
  */
+function addAll(...num) {
+    let number = 0;
+    for (let i = 0; i < num.length; i++) {
+        number += num[i]
+    }
+    return number;
+}
 
 /*
  * Write and document a function called makeHappy that takes
  * an array and prepends 'Happy ' to the beginning of all the
  * words and returns them as a new array. Use the `map` function.
  */
+
+/**
+ * Prepends 'Happy ' to the beginning of each word in the input array and returns a new array.
+ *
+ * @param {string[]} words - The array containing words to be prefixed with 'Happy '.
+ * @returns {string[]} - A new array with 'Happy ' added to each word.
+ */
+
+
+function makeHappy(words) {
+    let newWords = words.map((word) => 'Happy ' + word)
+    return newWords;
+}
 
 /*
  * Write and document a function called getFullAddressesOfProperties
@@ -76,6 +125,25 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  *
  * Use `map` and an anonymous function.
  */
+/**
+ * Creates an array of mailing addresses from an array of property objects.
+ * 
+ * @param {Object[]} fullAddress - objects, each containing the keys:
+ *    - streetNumber {string} - The number of the street
+ *    - streetName {string} - The name of the street
+ *    - streetType {string} - The type of the street
+ *    - city {string} - The city name
+ *    - state {string} - The state name or abbreviation
+ *    - zip {string} - The ZIP  code
+ * @returns {string[]} - An array of strings representing full mailing addresses
+ *    with the following format:
+ *    "streetNumber streetName streetType city state zip"
+ *
+ */
+function getFullAddressesOfProperties(fullAddress) {
+    return fullAddress.map(property => `${property.streetNumber} ${property.streetName} ${property.streetType} ${property.city} ${property.state} ${property.zip}`);
+}
+
 
 /** 
  * Write and document a function called findLargest that uses `forEach`
@@ -92,6 +160,24 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * @returns {number|string} the number or string that is largest
  **/
 
+function findLargest(searchArray) {
+    let largest = searchArray[0]
+
+    searchArray.forEach(value => {
+        if (typeof value === 'string' && typeof largest === 'string') {
+            if (value.toLowerCase() > largest.toLowerCase()) {
+                largest = value;
+            }
+        } else if (typeof value === 'number' && typeof largest === 'number') {
+            if (value > largest) {
+                largest = value;
+            }
+        }
+
+
+    });
+    return largest;
+}
 
 /*
  * CHALLENGE
@@ -109,4 +195,4 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * calls with two anonymous functions.
  *
  * Read the tests to verify you have the correct behavior.
- */
+ **/
