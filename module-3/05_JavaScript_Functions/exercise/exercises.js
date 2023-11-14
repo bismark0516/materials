@@ -173,8 +173,6 @@ function findLargest(searchArray) {
                 largest = value;
             }
         }
-
-
     });
     return largest;
 }
