@@ -53,5 +53,20 @@ const homes = [
 
 
 console.log("This is TASK1")
-//write your code below
 
+function basicForEach(){
+  homes.forEach( (h) => {
+    console.log(`This is the MLS Id ${h.mlsId} and ${h.address.zip} and ${h.price}`);
+  });
+  
+}
+basicForEach()
+
+function standard_for_loop(){
+for (let i = 0; i < homes.length; i++){
+  if(homes.length > 0){
+    console.log(`This is the MLS Id is ${homes[i].mlsId} and the zip code is  ${homes[i].address.zip} and the price is  ${homes[i].price}`);
+  }
+}
+}
+standard_for_loop()

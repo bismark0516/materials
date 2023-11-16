@@ -53,4 +53,14 @@ const homes = [
 
 
 console.log("This is TASK2");
-//write your code below
+
+function basic_zip_filter(zipCode){
+  const filteredHomes = homes.filter((homes) => {
+  return homes.address.zip === zipCode;
+    
+  })
+  return filteredHomes;
+}
+
+console.log(basic_zip_filter('43023'));
+
