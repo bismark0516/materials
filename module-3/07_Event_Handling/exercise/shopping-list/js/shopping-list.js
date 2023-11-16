@@ -21,6 +21,45 @@ function setPageTitle() {
   const title = document.getElementById('title');
   title.innerText = pageTitle;
 }
+document.addEventListener("DOMContentLoaded", () => {
+  setPageTitle();
+  displayGroceries();
+  const task = document.querySelectorAll('li')
+
+  task.forEach((task) => {
+    task.addEventListener('click', () => {
+      if (!task.classList.contains('completed')) {
+        task.classList.add('completed');
+        task.querySelector('i').classList.add('completed');
+  
+      }
+    });
+    task.addEventListener('dblclick', () => {
+      if (task.classList.contains('completed')) {
+        task.classList.remove('completed');
+        task.querySelector('i').classList.remove('completed');
+      }
+    })
+  });
+  
+  const completeAll = document.getElementById('toggleAll');
+  completeAll.addEventListener('click', () => {
+    task.forEach((task) => {
+      task.classList.toggle('completed');
+      task.querySelector('i').classList.add('completed');
+    });
+    allItemsIncomplete = !allItemsIncomplete;
+    if (allItemsIncomplete) {
+      completeAll.innerText = 'Mark All Complete';
+    } else {
+      completeAll.innerText = 'Mark All Incomplete';
+    }
+  });
+
+
+})
+
+
 
 /**
  * This function will loop over the array of groceries that was set above and add them to the DOM.
