@@ -1,54 +1,54 @@
 <template>
     <div class="todo-list">
-      <h1>My Daily Routine</h1>
-      <ul>
-        <li v-for="todo in filteredTodos" :key="todo.name" :class="{ finished: todo.done }">
-          <input name="done-checkbox" type="checkbox" v-model="todo.done" />
-          {{ todo.name }}
-        </li>
-      </ul>
-      <input name="filter-text" type="text" v-model="filterText" />
+        <h1>My Daily Routine</h1>
+        <ul>
+            <li v-for="todo in filteredTodos" :key="todo.name" :class="{ finished: todo.done }">
+                <input name="done-checkbox" type="checkbox" v-model="todo.done" />
+                {{ todo.name }}
+            </li>
+        </ul>
+        <input name="filter-text" type="text" v-model="filterText" />
     </div>
-  </template>
+</template>
   
-  <script>
-  export default {
+<script>
+export default {
     data() {
-      return {
-        filterText: '',
-        todos: [
-          {
-            name: 'Wake up',
-            done: false
-          },
-          {
-            name: '5 Minute Morning Movement',
-            done: false
-          },
-          {
-            name: 'Meditate',
-            done: false
-          },
-          {
-            name: 'Brush Teeth',
-            done: false
-          },
-          {
-            name: 'Shower',
-            done: false
-          }
-        ]
-      };
+        return {
+            filterText: '',
+            todos: [
+                {
+                    name: 'Wake up',
+                    done: false
+                },
+                {
+                    name: '5 Minute Morning Movement',
+                    done: false
+                },
+                {
+                    name: 'Meditate',
+                    done: false
+                },
+                {
+                    name: 'Brush Teeth',
+                    done: false
+                },
+                {
+                    name: 'Shower',
+                    done: false
+                }
+            ]
+        };
     },
     computed: {
-      filteredTodos() {
-        return this.todos.filter((todo) => {
-          return todo.name.includes(this.filterText);
-        });
-      }
+        filteredTodos() {
+            return this.todos.filter((todo) => {
+                return todo.name.includes(this.filterText);
+            });
+        }
     }
-  };
-  </script>
+};
+</script>
   
 
 
@@ -93,6 +93,7 @@ li:last-child {
 .finished {
     background-color: grey;
 }
+
 input[type=text] {
     width: 75%;
     margin: auto;
