@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  props: ['rating', 'reviews'],
+  props: ['rating'],
   methods: {
     updateFilter() {
       this.$store.commit('UPDATE_FILTER', this.rating);
@@ -15,8 +15,7 @@ export default {
   },
   computed: {
     numberOfReviews() {
-      // Get reviews from props
-      const reviews = this.reviews;
+      const reviews = this.$store.state.reviews;
       const matchingReviews = reviews.filter((review) => {
         return review.rating === this.rating;
       });
@@ -46,5 +45,4 @@ export default {
 .amount:hover {
   cursor: pointer;
 }
-
 </style>

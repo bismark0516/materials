@@ -7,16 +7,15 @@
 
 <script>
 export default {
-  props: ['rating', 'reviews'],
+  props: ['rating'],
   methods: {
     updateFilter() {
-      this.$store.commit('UPDATE_FILTER', this.rating);
+      this.$store.commit("UPDATE_FILTER", this.rating)
     }
   },
   computed: {
     numberOfReviews() {
-      // Get reviews from props
-      const reviews = this.reviews;
+      const reviews = this.$store.state.reviews
       const matchingReviews = reviews.filter((review) => {
         return review.rating === this.rating;
       });

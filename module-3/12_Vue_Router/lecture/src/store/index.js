@@ -86,7 +86,7 @@ export function createStore() {
     },
     mutations: {
       ADD_REVIEW(state,review) {
-        const product = this.state.products.find(p => p.id == review.productID);
+        const product = this.state.products.find(p => p.id == review.productId);
         review.id = this.state.nextReviewId++;
         product.reviews.unshift(review);
       },
