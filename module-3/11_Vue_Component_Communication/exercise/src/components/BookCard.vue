@@ -1,37 +1,30 @@
 <template>
-  <div class="card" v-bind:class="{ read: book.read }">
-    <h2 class="book-title">{{ book.title }}</h2>
-    <img v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" class="book-image" />
-    <h3 class="book-author">{{ book.author }}</h3>
-    <button @:click.prevent="markUnread" class="mark-unread" v-if="book.read">Mark Unread</button>
-    <button @:click.prevent="markRead" class="mark-read" v-else>Mark Read</button>
+  <div class="card" :class="{ 'read': book.read }">
+    <img class="book-image" :src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" alt="Book Cover">
+    <div class="book-details">
+      <h2 class="book-title">{{ book.title }}</h2>
+      <h3 class="book-author">{{ book.author }}</h3>
+    </div>
+    <button class="mark-read" @click="setStatus(true)" v-if="!book.read">Mark as Read</button>
+    <button class="mark-unread" @click="setStatus(false)" v-if="book.read">Mark as Unread</button>
   </div>
 </template>
 <script>
 export default {
-
-
-  name: 'BookCard',
   props: {
-
-    book: Object
+    book: {
+      book: Object,
+    }
   },
   methods: {
-
-    setRead() {
-      let status = true;
-      this.$store.commit("changeStatus", { book: this.book, status: status });
-    },
-    setUnread() {
-      let status = false;
-      this.$store.commit("changeStatus", { book: this.book, status: status });
+    setStatus(isRead) {
+      this.$store.commit('setStatus', { isbn: this.book.isbn, isRead });
     }
   }
 }
-
-
-
 </script>
+
+
 
 <style>
 .card {

@@ -2,7 +2,7 @@
   <div id="book-app">
     <h1>Reading List</h1>
     <reading-list />
-    <new-book-form />
+    <new-book-form @new-book-form="addToList"/>
   
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     
     
   },
+  methods: {
+    addToList(book) {
+      this.$store.commit('addBook', book);
+    }
+  }
  }
 </script>
 

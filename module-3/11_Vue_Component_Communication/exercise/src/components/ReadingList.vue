@@ -12,6 +12,11 @@ import BookCard from './BookCard.vue'
 export default {
   components: {
     BookCard
+  },
+  computed: {
+    books() {
+      return this.$store.state.books;
+    }
   }
 
 }

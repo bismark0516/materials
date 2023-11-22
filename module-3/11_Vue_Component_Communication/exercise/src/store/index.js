@@ -31,15 +31,22 @@ export function createStore() {
       ]
     },
     mutations: {
-      changeStatus(state, payload) {
-        payload.book.read = payload.status
+      setStatus(state, { isbn, isRead }) {
+        const book = state.books.find(book => book.isbn === isbn);
+        if (book) {
+          book.read = isRead;
+        }
       },
       addBook(state, book) {
         state.books.push(book);
       }
       
     },
-    actions: {},
+    actions: {
+      addBook({ commit }, book) {
+        commit("addBook", book);
+      }
+    },
     modules: {},
     // Strict should not be used in production code. It is used here as a
     // learning aid to warn you if state is modified without using a mutation.
