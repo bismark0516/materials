@@ -15,9 +15,8 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" ref="selectAllCheckbox"
-              v-on:change="selectAll"
-              :checked="selectedUserIds.length === filteredList.length"/>
+            <input type="checkbox" id="selectAll" v-on:change.prevent="selectAllUsers"
+              v-bind:checked="selectedUsersIds.length === users.length" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -40,14 +39,9 @@
           </td>
           <td>&nbsp;</td>
         </tr>
-        <tr
-          v-for="user in filteredList"
-          v-bind:key="user.id"
-          v-bind:class="{ deactivated: user.status === 'Inactive' }"
-        >
+        <tr v-for="user in filteredList" v-bind:key="user.id" v-bind:class="{ deactivated: user.status === 'Inactive' }">
           <td>
-            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id"  v-model="selectedUserIds" ref="userCheckboxes"
-              v-on:change="handleCheckboxChange" />
+            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" v-model="selectedUsersIds" />
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -55,21 +49,26 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnActivateDeactivate" v-on:click="toggleStatus(user.id)" >Activate or Deactivate</button>
+            <button class="btnActivateDeactivate" v-on:click="toggleStatus(user.id)">{{ user.status === 'Active' ?
+              'Deactivate' : 'Activate' }}</button>
           </td>
         </tr>
       </tbody>
     </table>
+
     <div class="all-actions">
-      <button v-on:click="activateUsers"
-      :disabled="selectedUserIds.length === 0" >Activate Users</button>
-      <button v-on:click="deactivateUsers"
-      :disabled="selectedUserIds.length === 0">Deactivate Users</button>
-      <button v-on:click="deleteUsers"
-      :disabled="selectedUserIds.length === 0">Delete Users</button>
+      <button v-bind:disabled="selectedUsersIds.length === 0" v-on:click.prevent="enabledSelectedUsers">Activate
+        Users</button>
+      <button v-bind:disabled="selectedUsersIds.length === 0" v-on:click.prevent="disabledSelectedUsers">Deactivate
+        Users</button>
+      <button v-bind:disabled="selectedUsersIds.length === 0" v-on:click.prevent="deleteSelectedUsers">Delete
+        Users</button>
     </div>
+
     <button v-on:click="showForm = !showForm">Add New User</button>
-    <form id="frmAddNewUser" v-show="showForm" v-on:submit.prevent="createUser">
+
+    <form id="frmAddNewUser" v-show="showForm" v-on:submit.prevent="addNewUser"
+      v-bind:checked="selectedUsersIds.length === users.length">
       <div class="field">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" v-model="newUser.firstName" />
@@ -80,20 +79,24 @@
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" v-model="newUser.username"/>
+        <input type="text" id="username" name="username" v-model="newUser.username" />
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress"/>
+        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress" />
       </div>
       <button type="submit" class="btn save">Save User</button>
     </form>
   </div>
 </template>
+
 <script>
 export default {
   data() {
+
     return {
+      showForm: false,
+      selectedUsersIds: [],
       filter: {
         firstName: "",
         lastName: "",
@@ -102,7 +105,6 @@ export default {
         status: ""
       },
       nextUserId: 7,
-      showForm: false,
       newUser: {
         id: null,
         firstName: "",
@@ -111,7 +113,6 @@ export default {
         emailAddress: "",
         status: "Active"
       },
-      selectedUserIds: [],
       users: [
         {
           id: 1,
@@ -168,71 +169,58 @@ export default {
     getNextUserId() {
       return this.nextUserId++;
     },
-    createUser() {
+    addNewUser() {
       this.newUser.id = this.getNextUserId();
-      this.users.push({ ...this.newUser });
-      this.newUser = {
-        id: null,
-        firstName: "",
-        lastName: "",
-        username: "",
-        emailAddress: "",
-        status: "Active"
-      };
-      this.showForm = false;
+      this.users.unshift(this.newUser);
+      this.newUser = {};
     },
     toggleStatus(userId) {
-      const userIndex = this.users.findIndex(user => user.id === userId);
-      if (userIndex !== -1) {
-        this.users[userIndex].status = (this.users[userIndex].status === 'Active') ? 'Inactive' : 'Active';
-      }
-    },
-    deactivateUsers() {
-      this.selectedUserIds.forEach((userId) => {
-        const userIndex = this.users.findIndex((user) => user.id === userId);
-        if (userIndex !== -1) {
-          this.users[userIndex].status = 'Inactive';
-        }
+      const index = this.users.findIndex((user) => {
+        return user.id === userId
       });
-      this.selectedUserIds = [];
+      this.users[index].status = this.users[index].status === "Active" ? "Inactive" : "Active";
     },
-    deleteUsers() {
-      this.selectedUserIds.forEach((userId) => {
+    enabledSelectedUsers() {
+      this.selectedUsersIds.forEach((userId) => {
+        const index = this.users.findIndex((user) => {
+          return user.id === userId
+          
+        });
+        this.users[index].status = "Active";
+        
+      });
+      this.selectedUsersIds = [];
+
+    },
+    disabledSelectedUsers() {
+      this.selectedUsersIds.forEach((userId) => {
+        const index = this.users.findIndex((user) => {
+          return user.id === userId
+          
+        });
+        this.users[index].status = "Inactive";
+      });
+      this.selectedUsersIds = [];
+    },
+
+    deleteSelectedUsers() {
+      this.selectedUsersIds.forEach((userId) => {
         this.users = this.users.filter((user) => user.id !== userId);
       });
-      this.selectedUserIds = [];
+      this.selectedUsersIds = [];
     },
-    activateUsers() {
-      this.selectedUserIds.forEach((userId) => {
-        const userIndex = this.users.findIndex((user) => user.id === userId);
-        if (userIndex !== -1) {
-          this.users[userIndex].status = 'Active';
-        }
-      });
-      this.selectedUserIds = [];
-    },
-    selectAll() {
-      if (this.selectedUserIds.length === this.filteredList.length) {
-        this.selectedUserIds = [];
+
+    selectAllUsers(event) {
+      if (event.target.checked) {
+        this.selectedUsersIds = [];
+        this.users.forEach((user) => {
+          this.selectedUsersIds.push(user.id);
+        });
       } else {
-        this.selectedUserIds = this.filteredList.map(user => user.id);
+        this.selectedUsersIds = [];
       }
-    },
-    updateSelectAll() {
-      this.$refs.selectAllCheckbox.checked =
-        this.selectedUserIds.length === this.filteredList.length;
-    },
-    handleCheckboxChange() {
-      this.selectedUserIds = this.$refs.userCheckboxes
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => parseInt(checkbox.value));
-        this.updateSelectAll();
-    },
-    watch: {
-    filteredList() {
-      this.updateSelectAll();
-    },
-  },
+    }
+
   },
   computed: {
     filteredList() {
@@ -275,6 +263,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 table {
   margin-top: 20px;
@@ -282,39 +271,47 @@ table {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin-bottom: 20px;
 }
+
 th {
   text-transform: uppercase;
 }
+
 td {
   padding: 10px;
 }
+
 tr.deactivated {
   color: red;
 }
+
 input,
 select {
   font-size: 16px;
 }
+
 form {
   margin: 20px;
   width: 350px;
 }
+
 .field {
   padding: 10px 0px;
 }
+
 label {
   width: 140px;
   display: inline-block;
 }
+
 button {
   margin-right: 5px;
 }
+
 .all-actions {
   margin-bottom: 40px;
 }
+
 .btn.save {
   margin: 20px;
   float: right;
-}
-</style>
-
+}</style>
