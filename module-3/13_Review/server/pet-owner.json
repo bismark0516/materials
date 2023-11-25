@@ -1,0 +1,30 @@
+{
+  "owners": [
+    {
+      "id": 1,
+      "name": "John Fulton",
+      "email": "john@johnfulton.org"
+    },
+    {
+      "id": 2,
+      "name": "Lisa Bruegge-Fulton",
+      "email": "lisa@bruegge-fulton.org"
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Bella",
+      "type": "dog",
+      "age": 6,
+      "owner": 1
+    },
+    {
+      "id": 2,
+      "name": "Primrose",
+      "type": "cat",
+      "age": 13,
+      "owner": 2
+    }
+  ]
+}
