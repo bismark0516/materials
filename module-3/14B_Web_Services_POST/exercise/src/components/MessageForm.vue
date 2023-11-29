@@ -50,9 +50,30 @@ export default {
         
         // TODO - Do an add, then navigate Home on success.
         // For errors, call handleErrorResponse
+        messageService
+          .create(this.editMessage)
+          .then(response => {
+            if (response.status == 201) {
+              this.$store.commit('SET_NOTIFICATION', `Message added.`);
+              this.$router.push({ name: 'TopicDetailsView', param : {topicId: this.editMessage.topicId}});
+            }
+          })
+          .catch(error => {
+            this.handleErrorResponse(error, 'adding');
+          });
 
       } else {
-        
+        messageService
+          .update(this.editMessage.id, this.editMessage)
+          .then(response => {
+            if (response.status == 200) {
+              this.$store.commit('SET_NOTIFICATION', `Message updated.`);
+              this.$router.push({ name: 'MessageDetailsView', params : {topicId: this.editMessage.topicId}});
+            }
+          })
+          .catch(error => {
+            this.handleErrorResponse(error, 'updating');
+          });
         // TODO - Do an edit, then navigate back to Message Details on success
         // For errors, call handleErrorResponse
 

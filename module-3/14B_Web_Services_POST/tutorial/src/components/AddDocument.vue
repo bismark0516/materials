@@ -10,7 +10,7 @@
     </div>
     <div class="field">
       <label for="content">Content</label>
-      <textarea  id="content" name="content" spellcheck="false" v-model="document.content" />
+      <textarea id="content" name="content" spellcheck="false" v-model="document.content" />
     </div>
     <div class="actions">
       <button type="button" v-on:click="cancel()">Cancel</button>&nbsp;
@@ -20,6 +20,9 @@
 </template>
 
 <script>
+
+import DocsService from '../services/DocsService';
+
 export default {
   data() {
     return {
@@ -35,10 +38,17 @@ export default {
   },
   methods: {
     saveDocument() {
-
+      DocsService
+        .create(this.document)
+        .then((response) => {
+          if (response.status === 201) {
+            this.$router.push({ name: 'HomeView' });
+          }
+        })
     },
+
     cancel() {
-      this.$router.push({name: 'HomeView'});
+      this.$router.push({ name: 'HomeView' });
     }
   }
 };
@@ -50,27 +60,32 @@ form {
   font-size: 16px;
   width: 500px;
 }
+
 form * {
   box-sizing: border-box;
   line-height: 1.5;
 }
+
 .field {
   display: flex;
   flex-direction: column;
 }
+
 .field label {
   margin: 4px 0;
   font-weight: bold;
 }
+
 .field input,
 .field textarea {
   padding: 8px;
 }
+
 .field textarea {
   height: 300px;
 }
+
 .actions {
   text-align: right;
   padding: 10px 0;
-}
-</style>
+}</style>

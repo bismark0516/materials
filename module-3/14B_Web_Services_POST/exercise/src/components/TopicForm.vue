@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import TopicService from '../services/TopicService';
+
 export default {
   props: {
     topic: {
@@ -33,20 +35,46 @@ export default {
   methods: {
     submitForm() {
       // Do client-side form validation 
+      console.log('submitForm');
       if (!this.validateForm()) {
         //Form isn't valid, user must update and submit again.
         return;
       }
       // Check for add or edit
+      console.log('validateform = true');  
       if (this.editTopic.id === 0) {
 
         // TODO - Do an add, then navigate Home on success.
         // For errors, call handleErrorResponse
+        console.log('this.editTopic' , this.editTopic);
+
+        TopicService
+          .create(this.editTopic)
+          .then(response => {
+            if (response.status == 201) {
+              this.$store.commit('SET_NOTIFICATION', `Topic added.`);
+              this.$router.push({ name: 'HomeView'});
+            }
+          })
+          .catch(error => {
+            this.handleErrorResponse(error, 'adding');
+          });
 
       } else {
+        TopicService
+          .update(this.editTopic.id, this.editTopic)
+          .then(response => {
+            if (response.status === 200)
+            this.$store.commit('SET_NOTIFICATION', `Topic updated.`);
+              this.$router.push({ name: 'TopicDetailsView' });
+          })
+          .catch(error => {
+            this.handleErrorResponse(error, 'updating');
+          });
 
         // TODO - Do an edit, then navigate back to Topic Details on success
         // For errors, call handleErrorResponse
+
 
       }
     },
@@ -57,10 +85,10 @@ export default {
     handleErrorResponse(error, verb) {
       if (error.response) {
         if (error.response.status == 404) {
-          this.$router.push({name: 'NotFoundView'});
+          this.$router.push({ name: 'NotFoundView' });
         } else {
           this.$store.commit('SET_NOTIFICATION',
-          `Error ${verb} topic. Response received was "${error.response.statusText}".`);
+            `Error ${verb} topic. Response received was "${error.response.statusText}".`);
         }
       } else if (error.request) {
         this.$store.commit('SET_NOTIFICATION', `Error ${verb} topic. Server could not be reached.`);
@@ -69,6 +97,7 @@ export default {
       }
     },
     validateForm() {
+      console.log('validateForm');
       let msg = '';
 
       this.editTopic.title = this.editTopic.title.trim();
@@ -84,6 +113,7 @@ export default {
     },
   }
 };
+
 </script>
 
 <style>
@@ -91,26 +121,32 @@ form {
   padding: 20px;
   font-size: 16px;
 }
+
 form * {
   box-sizing: border-box;
   line-height: 1.5;
 }
+
 .field {
   display: flex;
   flex-direction: column;
 }
+
 .field label {
   margin: 4px 0;
   font-weight: bold;
 }
+
 .field input,
 .field textarea {
   padding: 8px;
   font-size: 18px;
 }
+
 .field textarea {
   height: 300px;
 }
+
 .actions {
   text-align: right;
   padding: 10px 0;

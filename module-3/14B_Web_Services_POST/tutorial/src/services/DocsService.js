@@ -14,4 +14,10 @@ export default {
     return http.get(`/docs/${id}`)
   },
 
+  methods: {
+    create(doc) {
+      return http.post('/docs', doc)
+    },
+
+  }
 }
