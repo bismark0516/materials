@@ -1,17 +1,14 @@
 <template>
-  <section
-    class="pet"
-    v-bind:class="{
-      yellow: item.type == 'cat',
-      orange: item.type == 'dog',
-      tan: item.type != 'cat' && item.type != 'dog',
-    }"
-  >
+  <section class="pet" v-bind:class="{
+    yellow: item.type == 'cat',
+    orange: item.type == 'dog',
+    tan: item.type != 'cat' && item.type != 'dog',
+  }">
     <p>Id: {{ item.id }}</p>
     <p>Name: {{ item.name }}</p>
     <p>Type: {{ item.type }}</p>
     <p>Age: {{ item.age }}</p>
-    <router-link v-bind:to="{name: 'editPet', params: {petId: item.id}}" >Edit</router-link>
+    <router-link v-bind:to="{ name: 'editPet', params: { petId: item.id } }">Edit</router-link>
   </section>
 </template>
 

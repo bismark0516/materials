@@ -3,11 +3,7 @@
     <pet-header />
     <h1>Owners</h1>
     <section class="container">
-      <owner
-        v-for="owner in currentOwners"
-        v-bind:key="owner.id"
-        v-bind:item="owner"
-      />
+      <owner v-for="owner in currentOwners" v-bind:key="owner.id" v-bind:item="owner" />
     </section>
 
     <button v-show="!showForm" v-on:click="showForm = true">Add Owner</button>
@@ -68,12 +64,8 @@ export default {
       return result + 1;
     },
   },
-  created() {
-    this.$store.commit("LOAD_OWNERS");
-  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

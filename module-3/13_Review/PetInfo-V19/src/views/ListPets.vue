@@ -68,9 +68,6 @@ export default {
       this.showForm = false;
     },
   },
-  created() {
-    this.$store.commit("LOAD_PETS");
-  },
 
 };
 </script>
