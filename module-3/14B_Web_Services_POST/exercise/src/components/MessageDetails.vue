@@ -2,7 +2,8 @@
   <header class="flex">
     <h1>{{ message.title }}</h1>
     <div class="actions">
-      <button class="btn-edit" v-on:click="$router.push({ name: 'EditMessageView', params: {messageId: messageId} })">Edit</button>
+      <button class="btn-edit"
+        v-on:click="$router.push({ name: 'EditMessageView', params: { messageId: messageId } })">Edit</button>
       <button class="btn-delete" v-on:click="deleteMessage">Delete</button>
     </div>
   </header>
@@ -36,7 +37,7 @@ export default {
   methods: {
     deleteMessage() {
       if (confirm("Are you sure you want to delete this message? This action cannot be undone.")) {
-        
+
         // TODO - Do a delete, then navigate to Topic Details on success
         // For errors, call handleErrorResponse
         messageService
@@ -44,7 +45,7 @@ export default {
           .then(response => {
             if (response.status == 200) {
               this.$store.commit('SET_NOTIFICATION', `Message deleted.`);
-              this.$router.push({ name: 'TopicDetailsView', params: {topicId: this.message.topicId} });
+              this.$router.push({ name: 'TopicDetailsView', params: { topicId: this.message.topicId } });
             }
           })
           .catch(error => {
@@ -56,10 +57,10 @@ export default {
     handleErrorResponse(error, verb) {
       if (error.response) {
         if (error.response.status == 404) {
-          this.$router.push({name: 'NotFoundView'});
+          this.$router.push({ name: 'NotFoundView' });
         } else {
           this.$store.commit('SET_NOTIFICATION',
-          `Error ${verb} message. Response received was "${error.response.statusText}".`);
+            `Error ${verb} message. Response received was "${error.response.statusText}".`);
         }
       } else if (error.request) {
         this.$store.commit('SET_NOTIFICATION', `Error ${verb} message. Server could not be reached.`);
@@ -81,10 +82,11 @@ export default {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   word-wrap: break-word;
 }
+
 .wrap {
   white-space: pre-wrap;
 }
+
 .created {
   margin-bottom: 1rem;
-}
-</style>
+}</style>
