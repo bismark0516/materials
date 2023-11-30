@@ -25,7 +25,6 @@ export default {
   methods: {},
 
   created() {
-
     this.$store.commit("LOAD_PETS");
   },
 };
@@ -42,7 +41,7 @@ export default {
 }
 
 section.nav {
- margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
 section.container {
