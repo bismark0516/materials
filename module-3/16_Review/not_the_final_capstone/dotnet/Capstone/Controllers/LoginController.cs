@@ -6,7 +6,6 @@ using Capstone.Security;
 
 namespace Capstone.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -21,7 +20,14 @@ namespace Capstone.Controllers
             this.userDao = userDao;
         }
 
-        [HttpPost]
+        [HttpGet("/")]
+        public ActionResult<string> Ready()
+        {
+            int userCount = userDao.GetUsers().Count;
+            return Ok($"Server is ready with {userCount} user(s).");
+        }
+
+        [HttpPost("/login")]
         public IActionResult Authenticate(LoginUser userParam)
         {
             // Default to bad username/password message
