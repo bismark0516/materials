@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>Pets</h1>
     <section class="container">
-      <pet v-for="pet in currentPets" v-bind:key="pet.id" v-bind:item="pet" />
+      <pet v-for="pet in pets" v-bind:key="pet.id" v-bind:item="pet" />
     </section>
 
     <button v-show="!showForm" v-on:click="showForm = true">Add Pet</button>
@@ -39,29 +39,38 @@ export default {
     };
   },
   computed: {
-    currentPets() {
-      return this.$store.state.pets;
-    },
+    
   },
   methods: {
-    nextPetId() {
-      let result = 0;
-      this.$store.state.pets.forEach((item) => {
-        if (item.id > result) {
-          result = item.id;
-        }
-      });
-      return result + 1;
-    },
-
     createNewPet() {
       if (this.newPet.name) {
-        this.newPet.id = this.nextPetId();
-        this.$store.commit("ADD_PET", this.newPet);
+        petService
+          .addPet(this.newPet)
+          .then(() => {
+            this.newPet = {};
+            this.showForm = false;
+            this.loadPets();
+          })
+          .catch((error) => {
+            if (error.response) {
+              // error.response exists
+              // Request was made, but response has error status (4xx or 5xx)
+              console.log("Error adding pet: ", error.response.status);
+            } else if (error.request) {
+              // There is no error.response, but error.request exists
+              // Request was made, but no response was received
+              console.log(
+                "Error adding pet: unable to communicate to server"
+              );
+            } else {
+              // Neither error.response and error.request exist
+              // Request was *not* made
+              console.log("Error adding pet: make request");
+            }
+          });
       }
-      this.newPet = {};
-      this.showForm = false;
     },
+
   },
 };
 </script>
