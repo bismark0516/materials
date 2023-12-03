@@ -27,6 +27,21 @@ namespace Capstone.Controllers
             return Ok($"Server is ready with {userCount} user(s).");
         }
 
+        //GET /whoami
+        [HttpGet("/whoami")]
+        public ActionResult<string> WhoAmI()
+        {
+            string result = User.Identity.Name;
+            if (result == null)
+            {
+                return "No token provided.";
+            }
+            else
+            {
+                return result;
+            }
+        }
+
         [HttpPost("/login")]
         public IActionResult Authenticate(LoginUser userParam)
         {
@@ -36,7 +51,7 @@ namespace Capstone.Controllers
             User user;
             // Get the user by username
             try
-            { 
+            {
                 user = userDao.GetUserByUsername(userParam.Username);
             }
             catch (DaoException)
@@ -57,9 +72,10 @@ namespace Capstone.Controllers
                 // Switch to 200 OK
                 result = Ok(retUser);
             }
-
             return result;
         }
+
+
 
         [HttpPost("/register")]
         public IActionResult Register(RegisterUser userParam)
